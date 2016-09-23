@@ -21,7 +21,7 @@
 </div>
 <script>
     var running = false;
-    var seconds = 0;
+    var miliseconds = 0;
     function startPause() {
         if(running) {
             running = false;
@@ -36,9 +36,12 @@
         function increment() {
             if (running) {
                 setTimeout(function () {
-                    seconds++;
-                    document.getElementById("dd").innerHTML = seconds;
-                }, 1000);
+                    miliseconds ++;
+                    var secodns;
+                    var minutes;
+                    document.getElementById("dd").innerHTML = minutes + ":" + secodns + ":" + miliseconds;
+                    increment();
+                }, 100);
             }
 
      }
