@@ -8,11 +8,11 @@
 <body>
 <div class="container">
     <div class="stopwatch">
-        <p id="dd">d</p>
+        <p id="timer"></p>
     </div>
     <div class="navbar">
         <ul>
-            <li id="start" onclick="startPause()">Start</li>
+            <li id="startPause" onclick="startPause()">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
         </ul>
     </div>
@@ -21,7 +21,7 @@
 </div>
 <script>
     var running = false;
-    var time = 0;
+    var time = 500;
     function startPause() {
         if (running) {
             running = false;
@@ -38,9 +38,21 @@
             setTimeout(function () {
                 time++;
                 var milliseconds = time % 10;
-                var seconds = Math.floor(time / 10);
-                var minutes = Math.floor(time / seconds / 60);
-                document.getElementById("dd").innerHTML = minutes + ":" + seconds + ":" + milliseconds;
+                var seconds = Math.floor(time / 10 % 60);
+                var minutes = Math.floor(time / 10 / 60);
+
+                if (minutes < 10) {
+                    minutes = "0" + minutes;
+                }
+                if (seconds < 10) {
+                    seconds = "0" + seconds;
+                }
+                if (seconds == 60) {
+                    minutes++;
+                    seconds = 0;
+                }
+
+                document.getElementById("timer").innerHTML = minutes + ":" + seconds + ":0" + milliseconds;
                 increment();
             }, 100);
         }
@@ -48,7 +60,8 @@
     function reset() {
         time = 0;
         running = false;
-        document.getElementById("start").innerHTML = "Start";
+        document.getElementById("startPause").innerHTML = "Start";
+        document.getElementById("timer").innerHTML = "00:00:00";
 
     }
 </script>
