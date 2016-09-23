@@ -12,8 +12,8 @@
     </div>
     <div class="navbar">
         <ul>
-            <li id = "start" onclick="startPause()">Start</li>
-            <li>Pause</li>
+            <li id="start" onclick="startPause()">Start</li>
+            <li id="reset" onclick="reset()">Reset</li>
         </ul>
     </div>
 
@@ -21,9 +21,9 @@
 </div>
 <script>
     var running = false;
-    var miliseconds = 0;
+    var time = 0;
     function startPause() {
-        if(running) {
+        if (running) {
             running = false;
             document.getElementById("start").innerHTML = "Resume";
         }
@@ -33,18 +33,24 @@
             document.getElementById("start").innerHTML = "Pause";
         }
     }
-        function increment() {
-            if (running) {
-                setTimeout(function () {
-                    miliseconds ++;
-                    var secodns;
-                    var minutes;
-                    document.getElementById("dd").innerHTML = minutes + ":" + secodns + ":" + miliseconds;
-                    increment();
-                }, 100);
-            }
+    function increment() {
+        if (running) {
+            setTimeout(function () {
+                time++;
+                var milliseconds = time % 10;
+                var seconds = Math.floor(time / 10);
+                var minutes = Math.floor(time / seconds / 60);
+                document.getElementById("dd").innerHTML = minutes + ":" + seconds + ":" + milliseconds;
+                increment();
+            }, 100);
+        }
+    }
+    function reset() {
+        time = 0;
+        running = false;
+        document.getElementById("start").innerHTML = "Start";
 
-     }
+    }
 </script>
 </body>
 </html>
