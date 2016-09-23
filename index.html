@@ -8,17 +8,41 @@
 <body>
 <div class="container">
     <div class="stopwatch">
-
+        <p id="dd">d</p>
     </div>
     <div class="navbar">
         <ul>
-            <li>Start</li>
-            <li>Start</li>
+            <li id = "start" onclick="startPause()">Start</li>
+            <li>Pause</li>
         </ul>
     </div>
 
-    <div style="clear: both" ;></div>
+    <div style="clear: both;"></div>
 </div>
+<script>
+    var running = false;
+    var seconds = 0;
+    function startPause() {
+        if(running) {
+            running = false;
+            document.getElementById("start").innerHTML = "Resume";
+        }
+        else {
+            running = true;
+            increment();
+            document.getElementById("start").innerHTML = "Pause";
+        }
+    }
+        function increment() {
+            if (running) {
+                setTimeout(function () {
+                    seconds++;
+                    document.getElementById("dd").innerHTML = seconds;
+                }, 1000);
+            }
+
+     }
+</script>
 </body>
 </html>
 
