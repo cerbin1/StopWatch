@@ -14,32 +14,40 @@
         <ul>
             <li id="startPause" onclick="startPause()">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
+            <li id="lap" onclick="displayLap()">Lap</li>
         </ul>
     </div>
+    <p id="outputLaps">dd</p>
 
     <div style="clear: both;"></div>
 </div>
 <script>
     var running = false;
-    var time = 500;
+    var time = 0;
+    var numberOfLap = 0;
+    var milliseconds;
+    var seconds;
+    var minutes;
+    var i;
     function startPause() {
         if (running) {
             running = false;
-            document.getElementById("start").innerHTML = "Resume";
+            clearInterval(i);
+            document.getElementById("startPause").innerHTML = "Resume";
         }
         else {
             running = true;
             increment();
-            document.getElementById("start").innerHTML = "Pause";
+            document.getElementById("startPause").innerHTML = "Pause";
         }
     }
     function increment() {
         if (running) {
-            setTimeout(function () {
-                time++;
-                var milliseconds = time % 10;
-                var seconds = Math.floor(time / 10 % 60);
-                var minutes = Math.floor(time / 10 / 60);
+            i = setInterval(function () {
+                time += 10;
+                milliseconds = time % 1000;
+                seconds = Math.floor(time / 1000);
+                minutes = Math.floor(time / 1000 / 60);
 
                 if (minutes < 10) {
                     minutes = "0" + minutes;
@@ -47,22 +55,25 @@
                 if (seconds < 10) {
                     seconds = "0" + seconds;
                 }
-                if (seconds == 60) {
-                    minutes++;
-                    seconds = 0;
-                }
 
-                document.getElementById("timer").innerHTML = minutes + ":" + seconds + ":0" + milliseconds;
-                increment();
-            }, 100);
+                document.getElementById("timer").innerHTML = minutes + ":" + seconds + ":" + milliseconds / 10;
+            }, 10);
         }
     }
     function reset() {
         time = 0;
+        clearInterval(i);
         running = false;
         document.getElementById("startPause").innerHTML = "Start";
         document.getElementById("timer").innerHTML = "00:00:00";
-
+    }
+    function displayLap() {
+        numberOfLap++;
+        // document.getElementById("outputLaps").innerHTML += "<br /> Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds;
+        document.getElementById("outputLaps").insertAdjacentHTML(
+                "beforebegin",
+                "<br /> Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds
+        );
     }
 </script>
 </body>
