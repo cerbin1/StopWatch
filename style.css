@@ -9,11 +9,13 @@
     background-color: yellow;
 }
 .stopwatch {
-    width: 200px;
+    width: 400px;
     height: 100px;
     background-color: lightgrey;
     font-size: 100px;
+    margin: 0 auto;
 }
+
 ul {
     width: 1000px;
     list-style-type: none;
