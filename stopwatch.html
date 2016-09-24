@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Stoper</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!--    <div id="timer" class="stopwatch"></div>
+        <div class="navbar">
+            <ul>
+                <li id="startPause" onclick="startPause()">Start</li>
+                <li id="reset" onclick="reset()">Reset</li>
+                <li id="lap" onclick="displayLap()">Lap</li>
+                <li id="clear" onclick="clearLaps()">Clear laps</li>
+            </ul>
+        </div>
+        <div id="outputLaps"></div>-->
+
+    Sekundy<input id = "seconds" type="text">
+    minuty<input id = "minutes" type="text">
+    <div onclick="countDown()">Kliknij</div>
+    <div id="here"></div>
+
+    <!--<div style="clear: both;"></div>-->
+</div>
+<script>
+    /*
+     var running = false;
+     var time = 5300;
+     var numberOfLap = 0;
+     var milliseconds;
+     var seconds;
+     var minutes;
+     var i;
+     function startPause() {
+     if (running) {
+     running = false;
+     clearInterval(i);
+     document.getElementById("startPause").innerHTML = "Resume";
+     }
+     else {
+     running = true;
+     increment();
+     document.getElementById("startPause").innerHTML = "Pause";
+     }
+     }
+     function increment() {
+     if (running) {
+     i = setInterval(function () {
+     time++;
+     milliseconds = time % 100;
+     seconds = Math.floor(time / 100) % 60;
+     minutes = Math.floor(time / 100 / 60);
+
+     if (minutes < 10) {
+     minutes = "0" + minutes;
+     }
+     if (seconds < 10) {
+     seconds = "0" + seconds;
+     }
+
+     document.getElementById("timer").innerHTML = minutes + ":" + seconds + ":" + milliseconds;
+     }, 10);
+     }
+     }
+     function reset() {
+     time = 0;
+     milliseconds = 0;
+     seconds = 0;
+     minutes = 0;
+     clearInterval(i);
+     running = false;
+     document.getElementById("startPause").innerHTML = "Start";
+     document.getElementById("timer").innerHTML = "00:00:00";
+     }
+     function displayLap() {
+     numberOfLap++;
+     var str = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds / 10 + "\n";
+     document.getElementById("outputLaps").appendChild(
+     document.createTextNode(str))
+     }
+
+
+     function clearLaps() {
+     numberOfLap = 0;
+     document.getElementById("outputLaps").innerHTML = "";
+     }*/
+    function countDown() {
+        var seconds = document.getElementById("seconds").value;
+        var minutes = document.getElementById("minutes").value;
+        alert(seconds + minutes);
+
+    }
+</script>
+</body>
+</html>
