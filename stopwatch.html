@@ -14,13 +14,14 @@
             <li id="startPause" onclick="startPause()">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
             <li id="lap" onclick="displayLap()">Lap</li>
-            <li id="clear" onclick="clearLaps()">Clear laps</li>
+            <li id="clear" class = "clearLapsButton" onclick="clearLaps()">Clear laps</li>
         </ul>
     </div>
+    <!--<div style="clear: both;"></div>-->
+
     <div id="outputLaps"></div>
 
 
-    <!--<div style="clear: both;"></div>-->
 </div>
 <script>
     var running = false;

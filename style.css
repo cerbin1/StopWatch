@@ -23,18 +23,25 @@ ul {
 
 .navbar li {
     cursor: pointer;
-    padding: 10px;
-    width: 100px;
-    background-color: greenyellow;
+    margin: 10px;
+    padding: 9px 11px;
+    width: 90px;
     float: left;
-    font-size: 25px;
+    font-size: 30px;
     border: 1px solid;
     text-align: center;
-    display: block;
     border-radius: 5px;
+    color: #1D2224;
 
 }
+.clearLapsButton {
+    width: 150px !important;
+}
 
+.navbar :hover {
+    background-color: #3E3F40;
+    color: #E1E4E6;
+}
 .subpage-button :hover {
     background-color: #3E3F40;
     color: #E1E4E6;
