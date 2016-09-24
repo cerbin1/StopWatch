@@ -5,13 +5,13 @@
 }
 
 .container {
-    width: 1000px;
-    margin: 200px auto;
+    width: 600px;
+    margin: 20% auto;
     min-height: 500px;
+    border: 1px solid;
 }
 
 .stopwatch {
-    width: 400px;
     height: 100px;
     background-color: lightgrey;
     font-size: 100px;
@@ -19,27 +19,31 @@
 }
 
 ul {
-    width: 1000px;
     list-style-type: none;
 }
 
-li {
+.navbar li {
     cursor: pointer;
-    display: block;
-    width: 50px;
     padding: 10px;
     background-color: greenyellow;
     float: left;
+    font-size: 25px;
+    border: 1px solid;
+    text-align: center;
+    display: block;
 }
-.group-buttons {
-    width: 500px;
-    height: 500px;
-    margin: 0 auto;
+
+.subpage-button :hover {
+    background-color: #3E3F40;
+    color: #E1E6E8;
 }
-.button {
+
+.subpage-button a {
+    text-decoration: none;
     float: left;
-    width: 200px;
+    width: 248px;
     margin-left: 10px;
+    margin-right: 10px;
     padding: 15px;
     font-weight: bold;
     font-family: Arial, sans-serif;
@@ -47,4 +51,8 @@ li {
     cursor: pointer;
     border: 1px solid;
     border-radius: 5px;
+    text-align: center;
+    color: #1D2224;
 }
+
+
