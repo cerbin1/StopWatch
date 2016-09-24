@@ -34,6 +34,7 @@ ul {
     color: #1D2224;
 
 }
+
 .clearLapsButton {
     width: 150px !important;
 }
@@ -42,6 +43,7 @@ ul {
     background-color: #3E3F40;
     color: #E1E4E6;
 }
+
 .subpage-button :hover {
     background-color: #3E3F40;
     color: #E1E4E6;
@@ -64,4 +66,12 @@ ul {
     color: #1D2224;
 }
 
+.backButton {
+    margin: 40px 30px 40px 30px;
+    text-align: right;
+    font-size: 20px;
+}
 
+.backButton a {
+    color: blue;
+}
