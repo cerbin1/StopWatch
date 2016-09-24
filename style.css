@@ -26,6 +26,9 @@ li {
     background-color: greenyellow;
     float: left;
 }
+#outputLaps {
+    white-space: pre;
+}
 
 /*
 * {

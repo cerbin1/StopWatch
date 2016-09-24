@@ -4,18 +4,17 @@
     <title>Stoper</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <div class="stopwatch">
-        <p id="timer"></p>
-    </div>
+    <div id="timer" class="stopwatch"></div>
     <div class="navbar">
         <ul>
             <li id="startPause" onclick="startPause()">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
             <li id="lap" onclick="displayLap()">Lap</li>
-            <li onclick="clearLaps()">Clear laps</li>
+            <li id="clear" onclick="clearLaps()">Clear laps</li>
         </ul>
     </div>
     <div id="outputLaps"></div>
@@ -73,17 +72,22 @@
     }
     function displayLap() {
         numberOfLap++;
-        // document.getElementById("outputLaps").innerHTML += "<br /> Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds;
-        /*document.getElementById("outputLaps").insertAdjacentHTML(
-                "beforebegin",
-                '<br />' + " Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":" + milliseconds
-        );*/
-        var str ="Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds + "//n";
+        var str = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds + "\n";
         document.getElementById("outputLaps").appendChild(
-                document.createTextNode(str)) //TODO cleaning laps
+                document.createTextNode(str))
     }
+
+
     function clearLaps() {
-        document.getElementById("outputLaps").innerHTML = '';
+        numberOfLap = 0;
+        document.getElementById("outputLaps").innerHTML = "";
+        /*        var myNode = document.getElementById("outputLaps");
+         while (myNode.firstChild) {
+         myNode.removeChild(myNode.firstChild);
+         }*/
+    }
+    class Countdown {
+
     }
 </script>
 </body>
