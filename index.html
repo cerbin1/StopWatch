@@ -15,11 +15,12 @@
             <li id="startPause" onclick="startPause()">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
             <li id="lap" onclick="displayLap()">Lap</li>
+            <li onclick="clearLaps()">Clear laps</li>
         </ul>
     </div>
-    <p id="outputLaps">dd</p>
+    <div id="outputLaps"></div>
 
-    <div style="clear: both;"></div>
+    <!--<div style="clear: both;"></div>-->
 </div>
 <script>
     var running = false;
@@ -62,6 +63,9 @@
     }
     function reset() {
         time = 0;
+        milliseconds = 0;
+        seconds = 0;
+        minutes = 0;
         clearInterval(i);
         running = false;
         document.getElementById("startPause").innerHTML = "Start";
@@ -70,10 +74,16 @@
     function displayLap() {
         numberOfLap++;
         // document.getElementById("outputLaps").innerHTML += "<br /> Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds;
-        document.getElementById("outputLaps").insertAdjacentHTML(
+        /*document.getElementById("outputLaps").insertAdjacentHTML(
                 "beforebegin",
-                "<br /> Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds
-        );
+                '<br />' + " Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":" + milliseconds
+        );*/
+        var str ="Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds + "//n";
+        document.getElementById("outputLaps").appendChild(
+                document.createTextNode(str)) //TODO cleaning laps
+    }
+    function clearLaps() {
+        document.getElementById("outputLaps").innerHTML = '';
     }
 </script>
 </body>
