@@ -23,7 +23,7 @@
 </div>
 <script>
     var running = false;
-    var time = 0;
+    var time = 5300;
     var numberOfLap = 0;
     var milliseconds;
     var seconds;
@@ -44,10 +44,10 @@
     function increment() {
         if (running) {
             i = setInterval(function () {
-                time += 10;
-                milliseconds = time % 1000;
-                seconds = Math.floor(time / 1000);
-                minutes = Math.floor(time / 1000 / 60);
+                time ++;
+                milliseconds = time % 100;
+                seconds = Math.floor(time / 100) % 60;
+                minutes = Math.floor(time / 100 / 60);
 
                 if (minutes < 10) {
                     minutes = "0" + minutes;
@@ -56,7 +56,7 @@
                     seconds = "0" + seconds;
                 }
 
-                document.getElementById("timer").innerHTML = minutes + ":" + seconds + ":" + milliseconds / 10;
+                document.getElementById("timer").innerHTML = minutes + ":" + seconds + ":" + milliseconds;
             }, 10);
         }
     }
@@ -81,10 +81,6 @@
     function clearLaps() {
         numberOfLap = 0;
         document.getElementById("outputLaps").innerHTML = "";
-        /*        var myNode = document.getElementById("outputLaps");
-         while (myNode.firstChild) {
-         myNode.removeChild(myNode.firstChild);
-         }*/
     }
     class Countdown {
 
