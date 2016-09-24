@@ -24,12 +24,15 @@ ul {
 .navbar li {
     cursor: pointer;
     padding: 10px;
+    width: 100px;
     background-color: greenyellow;
     float: left;
     font-size: 25px;
     border: 1px solid;
     text-align: center;
     display: block;
+    border-radius: 5px;
+
 }
 
 .subpage-button :hover {
