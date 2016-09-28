@@ -9,20 +9,86 @@
 <body>
 <div class="container">
 
-    <!-- Sekundy<input id = "seconds" type="text">
-     minuty<input id = "minutes" type="text">
-     <div onclick="countDown()">Kliknij</div>
-     <div id="here"></div>-->
-    <div style="text-align: center; margin-top: 30px; font-size: 50px;">COMING SOON...</div>
+
+    <div id="timer" class="stopwatch">00:00:00</div>
+    <div class="navbar">
+        <ul>
+            <li id="startPause" onclick="startPause()">Start</li>
+            <li id="reset" onclick="reset()">Reset</li>
+        </ul>
+    </div>
+
+    <p id="here"></p>
+
+
+    <!--<div style="text-align: center; margin-top: 30px; font-size: 50px;">COMING SOON...</div>-->
     <div class="backButton"><a href="index.html">Back</a></div>
+    <div id=""
+         Sekundy
+    <input id="seconds" type="text" value="0">
+    minuty<input id="minutes" type="text" value="0">
+    <div onclick="test()">Kliknij</div>
+    <div onclick="countDown()">testujemy</div>
 </div>
 <script>
-    /*    function countDown() {
-     var seconds = document.getElementById("seconds").value;
-     var minutes = document.getElementById("minutes").value;
-     alert(seconds + minutes);
+    var i;
+    var seconds;
+    var minutes;
+    var time = 0;
 
+    function countDown(time) {
+
+        seconds = document.getElementById("seconds").value;
+        minutes = document.getElementById("minutes").value;
+        time = parseInt(+seconds + minutes * 60);
+        console.log(time);
+    }
+    function startPause() {
+
+    }
+
+    /*var running = false;
+     var time = 0;
+     var milliseconds = 0;
+     var seconds = 0;
+     var minutes = 0;
+     var i;
+     function startPause() {
+     if (running) {
+     running = false;
+     clearInterval(i);
+     document.getElementById("startPause").innerHTML = "Resume";
+     }
+     else {
+     running = true;
+     increment();
+     document.getElementById("startPause").innerHTML = "Pause";
+     }
      }*/
+    function test() {
+        if (time == 0) {
+            seconds = document.getElementById("seconds").value;
+            minutes = document.getElementById("minutes").value;
+            time = parseInt(+seconds + minutes * 60);
+            dupa = time;
+        }
+        i = setInterval(function () {
+            /*time++;
+             milliseconds = time % 100;
+             seconds = Math.floor(time / 100) % 60;
+             minutes = Math.floor(time / 100 / 60);
+
+             if (minutes < 10) {
+             minutes = "0" + minutes;
+             }
+             if (seconds < 10) {
+             seconds = "0" + seconds;
+             }*/
+
+            document.getElementById("timer").innerHTML = "00:" + dupa;
+            dupa--;
+        }, 1000);
+    }
 </script>
 </body>
 </html>

@@ -66,6 +66,13 @@ ul {
     color: #1D2224;
 }
 
+input {
+    width: 100px;
+    height: 40px;
+    font-size: 30px;
+    text-align: center;
+}
+
 .backButton {
     margin: 40px 30px 40px 30px;
     text-align: right;
