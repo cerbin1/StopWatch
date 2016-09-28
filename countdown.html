@@ -10,6 +10,7 @@
 <div class="container">
 
 
+
     <div id="timer" class="stopwatch">00:00:00</div>
     <div class="navbar">
         <ul>
@@ -23,10 +24,11 @@
 
     <!--<div style="text-align: center; margin-top: 30px; font-size: 50px;">COMING SOON...</div>-->
     <div class="backButton"><a href="index.html">Back</a></div>
-    <div id=""
-         Sekundy
-    <input id="seconds" type="text" value="0">
-    minuty<input id="minutes" type="text" value="0">
+    <div id = ""></div>
+    Minuty<input id="minutes" type="text" value="">
+    Sekundy<input id="seconds" type="text" value="">
+    <input type = "button" id="CHUJ" onclick="chuj()" value = "OK">
+
     <div onclick="test()">Kliknij</div>
     <div onclick="countDown()">testujemy</div>
 </div>
@@ -35,6 +37,7 @@
     var seconds;
     var minutes;
     var time = 0;
+    var running = false;
 
     function countDown(time) {
 
@@ -44,7 +47,19 @@
         console.log(time);
     }
     function startPause() {
-
+        if (running) {
+            running = false;
+            clearInterval(i);
+            document.getElementById("startPause").innerHTML = "Resume";
+        }
+        else {
+            running = true;
+            increment();
+            document.getElementById("startPause").innerHTML = "Pause";
+        }
+    }
+    function chuj() {
+        document.getElementById("timer").innerHTML = document.getElementById("minutes").value + ":" + document.getElementById("seconds").value;
     }
 
     /*var running = false;
@@ -65,11 +80,11 @@
      document.getElementById("startPause").innerHTML = "Pause";
      }
      }*/
-    function test() {
+    function increment() {
         if (time == 0) {
             seconds = document.getElementById("seconds").value;
             minutes = document.getElementById("minutes").value;
-            time = parseInt(+seconds + minutes * 60);
+            time = parseInt( + seconds + minutes * 60);
             dupa = time;
         }
         i = setInterval(function () {
