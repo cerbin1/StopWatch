@@ -26,7 +26,7 @@
     <div id=""></div>
     <!--Minuty<input id="minutes" type="text" value="">-->
     Sekundy<input id="seconds" type="text" value="">
-    <input type="button" id="CHUJ" onclick="chuj()" value="OK">
+    <input type="button" id="CHUJ" onclick="displayNumberToCountdown()" value="OK">
 
     <div onclick="test()">Kliknij</div>
     <div onclick="countDown()">testujemy</div>
@@ -57,12 +57,25 @@
             document.getElementById("startPause").innerHTML = "Pause";
         }
     }
-    function chuj() {
-        var kkk = document.getElementById("seconds").value;
+    function displayNumberToCountdown() {
+        var seconds = document.getElementById("seconds").value;
+        var minutes = Math.floor(seconds / 60) % 60;
+        var hours = Math.floor(seconds / 3600);
+        var displaySeconds = ":";
+        var displayMinutes = ":";
+        var displayHours = "";
 
-        var minutes = Math.floor(kkk / 60) % 60;
-        var hours = Math.floor(kkk / 60 / 60);
-        document.getElementById("timer").innerHTML = hours + ":" + minutes + ":" + document.getElementById("seconds").value % 60;
+        if(seconds < 10){
+            displaySeconds = ":0";
+        }
+        if(minutes < 10){
+            displayMinutes = ":0";
+        }
+        if(hours < 10){
+            displayHours = "0";
+        }
+
+        document.getElementById("timer").innerHTML = displayHours + hours + displayMinutes + minutes + displaySeconds + document.getElementById("seconds").value % 60;
 
     }
 
