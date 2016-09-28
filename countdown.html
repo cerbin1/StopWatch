@@ -10,7 +10,6 @@
 <div class="container">
 
 
-
     <div id="timer" class="stopwatch">00:00:00</div>
     <div class="navbar">
         <ul>
@@ -24,10 +23,10 @@
 
     <!--<div style="text-align: center; margin-top: 30px; font-size: 50px;">COMING SOON...</div>-->
     <div class="backButton"><a href="index.html">Back</a></div>
-    <div id = ""></div>
-    Minuty<input id="minutes" type="text" value="">
+    <div id=""></div>
+    <!--Minuty<input id="minutes" type="text" value="">-->
     Sekundy<input id="seconds" type="text" value="">
-    <input type = "button" id="CHUJ" onclick="chuj()" value = "OK">
+    <input type="button" id="CHUJ" onclick="chuj()" value="OK">
 
     <div onclick="test()">Kliknij</div>
     <div onclick="countDown()">testujemy</div>
@@ -59,7 +58,12 @@
         }
     }
     function chuj() {
-        document.getElementById("timer").innerHTML = document.getElementById("minutes").value + ":" + document.getElementById("seconds").value;
+        var kkk = document.getElementById("seconds").value;
+
+        var minutes = Math.floor(kkk / 60) % 60;
+        var hours = Math.floor(kkk / 60 / 60);
+        document.getElementById("timer").innerHTML = hours + ":" + minutes + ":" + document.getElementById("seconds").value % 60;
+
     }
 
     /*var running = false;
@@ -84,7 +88,7 @@
         if (time == 0) {
             seconds = document.getElementById("seconds").value;
             minutes = document.getElementById("minutes").value;
-            time = parseInt( + seconds + minutes * 60);
+            time = parseInt(+seconds + minutes * 60);
             dupa = time;
         }
         i = setInterval(function () {
