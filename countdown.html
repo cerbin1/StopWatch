@@ -29,29 +29,19 @@
     var i;
     var seconds;
     var minutes;
+    var hours;
     var time = 0;
     var running = false;
     var isTimeSet = false;
+    var dd = 0;
 
-    function startPause() {
-        if (running) {
-            running = false;
-            clearInterval(i);
-            document.getElementById("startPause").innerHTML = "Resume";
-        }
-        else {
-            running = true;
-            increment();
-            document.getElementById("startPause").innerHTML = "Pause";
-        }
-    }
     function displayNumberToCountdown() {
         if (running == false) {
             if (document.getElementById("seconds").value >= 0) {
                 isTimeSet = true;
                 var seconds = document.getElementById("seconds").value;
-                var minutes = +document.getElementById("minutes").value + Math.floor(seconds / 60) % 60;
-                var hours = Math.floor(seconds / 3600);
+                var minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
+                var hours = Math.floor(document.getElementById("minutes").value / 60);
                 var displaySeconds = ":";
                 var displayMinutes = ":";
                 var displayHours = "";
@@ -78,7 +68,19 @@
             }
         }
         else {
-            console.log("taki chuj");
+            console.log("licznik teraz dziala, nie mozna ustawic innego czasu");
+        }
+    }
+    function startPause() {
+        if (running) {
+            running = false;
+            clearInterval(i);
+            document.getElementById("startPause").innerHTML = "Resume";
+        }
+        else {
+            running = true;
+            decrement();
+            document.getElementById("startPause").innerHTML = "Pause";
         }
     }
 
@@ -100,14 +102,40 @@
      document.getElementById("startPause").innerHTML = "Pause";
      }
      }*/
-    function increment() {
-        if (time == 0) {
-            seconds = document.getElementById("seconds").value;
-            minutes = document.getElementById("minutes").value;
-            time = parseInt(+seconds + minutes * 60);
+    function decrement() {
+        if (dd == 0) {
+            time = +document.getElementById("seconds").value + document.getElementById("minutes").value * 60;
             dupa = time;
+            console.log(dupa);
+            dd = 1;
         }
         i = setInterval(function () {
+            dupa--;
+
+            hours = Math.round(dupa / 3600);
+            minutes = Math.round(dupa / 60) % 60;
+            seconds = dupa % 60;
+
+
+            var displaySeconds = ":";
+            var displayMinutes = ":";
+            var displayHours = "";
+
+            if (seconds < 10) {
+                displaySeconds = ":0";
+            }
+            if (seconds % 60 == 0) {
+                displaySeconds = ":0";
+            }
+            if (minutes < 10) {
+                displayMinutes = ":0";
+            }
+            if (hours < 10) {
+                displayHours = "0";
+            }
+
+            document.getElementById("timer").innerHTML = displayHours + hours +
+                    displayMinutes + minutes + displaySeconds + seconds;
             /*time++;
              milliseconds = time % 100;
              seconds = Math.floor(time / 100) % 60;
@@ -120,8 +148,6 @@
              seconds = "0" + seconds;
              }*/
 
-            document.getElementById("timer").innerHTML = "00:" + dupa;
-            dupa--;
         }, 1000);
     }
 </script>
