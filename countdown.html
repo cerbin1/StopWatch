@@ -22,113 +22,113 @@
 
     <div class="backButton"><a href="index.html">Back</a></div>
     <div id=""></div>
-    <label for="">inuty<input id="minutes" type="text" value=""></label>M
+    <label for="">Minuty<input id="minutes" type="text" value=""></label>
     <label for="">Sekundy<input id="seconds" type="text" value=""></label>
     <input type="button" id="CHUJ" onclick="displayNumberToCountdown()" value="Set">
 
     <div onclick="test()">Kliknij</div>
-</div>
-<script>
-    var i;
-    var seconds;
-    var minutes;
-    var time = 0;
-    var running = false;
-    var isTimeSet = false;
+    </div>
+    <script>
+        var i;
+        var seconds;
+        var minutes;
+        var time = 0;
+        var running = false;
+        var isTimeSet = false;
 
-    function startPause() {
-        if (running) {
-            running = false;
-            clearInterval(i);
-            document.getElementById("startPause").innerHTML = "Resume";
+        function startPause() {
+            if (running) {
+                running = false;
+                clearInterval(i);
+                document.getElementById("startPause").innerHTML = "Resume";
+            }
+            else {
+                running = true;
+                increment();
+                document.getElementById("startPause").innerHTML = "Pause";
+            }
         }
-        else {
-            running = true;
-            increment();
-            document.getElementById("startPause").innerHTML = "Pause";
-        }
-    }
-    function displayNumberToCountdown() {
-        if (running == false) {
-            if (parseInt(document.getElementById("seconds").value) > 0) {
-                if (Number.isInteger(seconds)) {
-                    isTimeSet = true;
-                    var seconds = parseInt(document.getElementById("seconds").value);
-                    var minutes = Math.floor(seconds / 60) % 60;
-                    var hours = Math.floor(seconds / 3600);
-                    var displaySeconds = ":";
-                    var displayMinutes = ":";
-                    var displayHours = "";
+        function displayNumberToCountdown() {
+            if (running == false) {
+                if (parseInt(document.getElementById("seconds").value) > 0) {
+                    if (Number.isInteger(seconds)) {
+                        isTimeSet = true;
+                        var seconds = parseInt(document.getElementById("seconds").value);
+                        var minutes = Math.floor(seconds / 60) % 60;
+                        var hours = Math.floor(seconds / 3600);
+                        var displaySeconds = ":";
+                        var displayMinutes = ":";
+                        var displayHours = "";
 
-                    if (seconds < 10) {
-                        displaySeconds = ":0";
-                    }
-                    if (minutes < 10) {
-                        displayMinutes = ":0";
-                    }
-                    if (hours < 10) {
-                        displayHours = "0";
-                    }
+                        if (seconds < 10) {
+                            displaySeconds = ":0";
+                        }
+                        if (minutes < 10) {
+                            displayMinutes = ":0";
+                        }
+                        if (hours < 10) {
+                            displayHours = "0";
+                        }
 
-                    document.getElementById("timer").innerHTML = displayHours + hours + displayMinutes + minutes + displaySeconds + seconds % 60;
+                        document.getElementById("timer").innerHTML = displayHours + hours + displayMinutes + minutes + displaySeconds + seconds % 60;
+                    }
+                    else {
+//                alert("You have to input integer number!");
+                        console.log("it isnt an integer");
+                    }
+                }
+                else {
+//                alert("You can't input negative time");
+                    console.log("nie moze byc ujemnego czasu")
                 }
             }
             else {
-//                alert("You have to input integer number!");
-            }
-        else
-            {
-//                alert("You can't input negative time");
-                console.log("nie moze byc ujemnego czasu")
+                console.log("taki chuj");
             }
         }
-        else {
-            console.log("taki chuj");
+
+        /*var running = false;
+         var time = 0;
+         var milliseconds = 0;
+         var seconds = 0;
+         var minutes = 0;
+         var i;
+         function startPause() {
+         if (running) {
+         running = false;
+         clearInterval(i);
+         document.getElementById("startPause").innerHTML = "Resume";
+         }
+         else {
+         running = true;
+         increment();
+         document.getElementById("startPause").innerHTML = "Pause";
+         }
+         }*/
+        function increment() {
+            if (time == 0) {
+                seconds = document.getElementById("seconds").value;
+                minutes = document.getElementById("minutes").value;
+                time = parseInt(+seconds + minutes * 60);
+                dupa = time;
+            }
+            i = setInterval(function () {
+                /*time++;
+                 milliseconds = time % 100;
+                 seconds = Math.floor(time / 100) % 60;
+                 minutes = Math.floor(time / 100 / 60);
+
+                 if (minutes < 10) {
+                 minutes = "0" + minutes;
+                 }
+                 if (seconds < 10) {
+                 seconds = "0" + seconds;
+                 }*/
+
+                document.getElementById("timer").innerHTML = "00:" + dupa;
+                dupa--;
+            }, 1000);
         }
-    }
-
-    /*var running = false;
-     var time = 0;
-     var milliseconds = 0;
-     var seconds = 0;
-     var minutes = 0;
-     var i;
-     function startPause() {
-     if (running) {
-     running = false;
-     clearInterval(i);
-     document.getElementById("startPause").innerHTML = "Resume";
-     }
-     else {
-     running = true;
-     increment();
-     document.getElementById("startPause").innerHTML = "Pause";
-     }
-     }*/
-    function increment() {
-        if (time == 0) {
-            seconds = document.getElementById("seconds").value;
-            minutes = document.getElementById("minutes").value;
-            time = parseInt(+seconds + minutes * 60);
-            dupa = time;
-        }
-        i = setInterval(function () {
-            /*time++;
-             milliseconds = time % 100;
-             seconds = Math.floor(time / 100) % 60;
-             minutes = Math.floor(time / 100 / 60);
-
-             if (minutes < 10) {
-             minutes = "0" + minutes;
-             }
-             if (seconds < 10) {
-             seconds = "0" + seconds;
-             }*/
-
-            document.getElementById("timer").innerHTML = "00:" + dupa;
-            dupa--;
-        }, 1000);
-    }
-</script>
+    </script>
 </body>
 </html>
