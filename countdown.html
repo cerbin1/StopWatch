@@ -49,8 +49,9 @@
             if (running == false) {
                 if (parseInt(document.getElementById("seconds").value) > 0) {
                     isTimeSet = true;
-                    var seconds = parseInt(document.getElementById("seconds").value);
-                    var minutes = Math.floor(seconds / 60) % 60;
+                    var seconds = document.getElementById("seconds").value;
+//                    var minutes = +(Math.floor(seconds / 60) % 60) + document.getElementById("minutes").value;
+                    var minutes = + document.getElementById("minutes").value + Math.floor(seconds / 60) % 60;
                     var hours = Math.floor(seconds / 3600);
                     var displaySeconds = ":";
                     var displayMinutes = ":";
