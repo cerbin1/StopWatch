@@ -7,9 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
-<label class="container">
-
-
+<div class="container">
     <div id="timer" class="stopwatch">00:00:00</div>
     <div class="navbar">
         <ul>
@@ -22,11 +20,10 @@
 
     <div class="backButton"><a href="index.html">Back</a></div>
     <div id=""></div>
-    <label for="">Minuty<input id="minutes" type="text" value=""></label>
-    <label for="">Sekundy<input id="seconds" type="text" value=""></label>
+    <label for="">Minuty<input id="minutes" type="number" value=""></label>
+    <label for="">Sekundy<input id="seconds" type="number" value=""></label>
     <input type="button" id="CHUJ" onclick="displayNumberToCountdown()" value="Set">
 
-    <div onclick="test()">Kliknij</div>
     </div>
     <script>
         var i;
@@ -51,31 +48,29 @@
         function displayNumberToCountdown() {
             if (running == false) {
                 if (parseInt(document.getElementById("seconds").value) > 0) {
-                    if (Number.isInteger(seconds)) {
-                        isTimeSet = true;
-                        var seconds = parseInt(document.getElementById("seconds").value);
-                        var minutes = Math.floor(seconds / 60) % 60;
-                        var hours = Math.floor(seconds / 3600);
-                        var displaySeconds = ":";
-                        var displayMinutes = ":";
-                        var displayHours = "";
+                    isTimeSet = true;
+                    var seconds = parseInt(document.getElementById("seconds").value);
+                    var minutes = Math.floor(seconds / 60) % 60;
+                    var hours = Math.floor(seconds / 3600);
+                    var displaySeconds = ":";
+                    var displayMinutes = ":";
+                    var displayHours = "";
 
-                        if (seconds < 10) {
+                    if (seconds < 10) {
                             displaySeconds = ":0";
-                        }
-                        if (minutes < 10) {
-                            displayMinutes = ":0";
-                        }
-                        if (hours < 10) {
-                            displayHours = "0";
-                        }
+                    }
+                    if (seconds % 60 == 0) {
+                        displaySeconds = ":0";
+                    }
+                    if (minutes < 10) {
+                        displayMinutes = ":0";
+                    }
+                    if (hours < 10) {
+                        displayHours = "0";
+                    }
 
-                        document.getElementById("timer").innerHTML = displayHours + hours + displayMinutes + minutes + displaySeconds + seconds % 60;
-                    }
-                    else {
-//                alert("You have to input integer number!");
-                        console.log("it isnt an integer");
-                    }
+
+                    document.getElementById("timer").innerHTML = displayHours + hours + displayMinutes + minutes + displaySeconds + seconds % 60;
                 }
                 else {
 //                alert("You can't input negative time");
