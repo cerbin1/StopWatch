@@ -74,10 +74,9 @@
     }
     function displayLap() {
         numberOfLap++;
-        var str = "\nNumber of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds / 10 + "\n";
-        document.getElementById("outputLaps").appendChild(
-                document.createTextNode(str))
-    }//TODO displaying lap in next line
+        var str = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds / 10 + "\n";
+        document.getElementById("outputLaps").innerHTML += str + "</br>";
+    }
 
 
     function clearLaps() {
