@@ -35,8 +35,29 @@
     var isTimeSet = false;
     var isCountdownSet = false;
 
-    function displayCountDown() {
+    function displayCountDown(seconds, minutes, hours) {
 
+        seconds = document.getElementById("seconds").value;
+        minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
+        hours = Math.floor(document.getElementById("minutes").value / 60);
+        var displaySeconds = ":";
+        var displayMinutes = ":";
+        var displayHours = "";
+
+        if (seconds < 10) {
+            displaySeconds = ":0";
+        }
+        if (seconds % 60 == 0) {
+            displaySeconds = ":0";
+        }
+        if (minutes < 10) {
+            displayMinutes = ":0";
+        }
+        if (hours < 10) {
+            displayHours = "0";
+        }
+        document.getElementById("timer").innerHTML = displayHours + hours +
+                displayMinutes + minutes + displaySeconds + seconds % 60;
     }
 
     function setCountdown() {
@@ -49,27 +70,13 @@
                         var seconds = document.getElementById("seconds").value;
                         var minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
                         var hours = Math.floor(document.getElementById("minutes").value / 60);
-                        var displaySeconds = ":";
-                        var displayMinutes = ":";
-                        var displayHours = "";
 
-                        if (seconds < 10) {
-                            displaySeconds = ":0";
-                        }
-                        if (seconds % 60 == 0) {
-                            displaySeconds = ":0";
-                        }
-                        if (minutes < 10) {
-                            displayMinutes = ":0";
-                        }
-                        if (hours < 10) {
-                            displayHours = "0";
-                        }
+                        displayCountDown(seconds, minutes, hours);
+
                         isCountdownSet = true;
                         time = +document.getElementById("seconds").value + document.getElementById("minutes").value * 60;
 
-                        document.getElementById("timer").innerHTML = displayHours + hours +
-                                displayMinutes + minutes + displaySeconds + seconds % 60;
+
                     }
                     else {
                         console.log("Musisz wpisac jakis czas, nie moze byc zerowy");
