@@ -12,13 +12,7 @@
     /*border: 1px solid;     //TODO check if this is better with border or not*/
 }
 
-.stopwatch {
-    font-size: 120px;
-    text-align: center;
-    margin: 0 auto;
-}
-
-.countdown {
+.buttons {
     font-size: 120px;
     text-align: center;
     margin: 0 auto;
