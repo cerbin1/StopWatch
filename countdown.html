@@ -31,6 +31,7 @@
     var running = false;
     var isTimeSet = false;
     var isCountdownSet = false;
+    var audio = new Audio('scream.mp3');
 
     function displayCountDown(seconds, minutes, hours) {
 
@@ -137,6 +138,7 @@
             if(time == 0) {
                 console.log("zerooooooooo");
                 clearInterval(i);
+                audio.play();
             }
         }, 1000);
     }
