@@ -8,10 +8,10 @@
 </head>
 <body>
 <div class="container">
-    <div id="timer" class="stopwatch">00:00:00</div>
+    <div id="timer" class="countdown">00:00:00</div>
     <div class="navbar">
-        <ul>
-            <li id="startPause" onclick="startPause()">Start</li>
+        <ul class = "countdown-buttons">
+            <li id="startPause" class = "centering-buttons" onclick="startPause()">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
         </ul>
     </div>
@@ -31,7 +31,6 @@
     var running = false;
     var isCountdownSet = false;
     var audio = new Audio('scream.mp3');
-
 
     function setCountdown() {
         if (running == false) {
