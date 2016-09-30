@@ -78,8 +78,10 @@ input {
     margin-left: 10px;
 }
 
-input button {
-    font-size: 50px;
+.input-button {
+    height: 50px;
+    font-size: 30px;
+    padding: 2px 5px;
 }
 
 .backButton {

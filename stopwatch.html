@@ -30,6 +30,7 @@
     var seconds = 0;
     var minutes = 0;
     var i;
+
     function startPause() {
         if (running) {
             running = false;
@@ -63,6 +64,7 @@
             }, 10);
         }
     }
+
     function reset() {
         time = 0;
         milliseconds = 0;
@@ -73,6 +75,7 @@
         document.getElementById("startPause").innerHTML = "Start";
         document.getElementById("timer").innerHTML = "00:00:00";
     }
+
     function displayLap() {
         numberOfLap++;
         var str = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds / 10 + "\n";
