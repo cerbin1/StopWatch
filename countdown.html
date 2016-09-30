@@ -38,7 +38,7 @@
     function displayNumberToCountdown() {
         if (running == false) {
             if (((Math.floor(document.getElementById("seconds").value) == document.getElementById("seconds").value)) && (Math.floor(document.getElementById("minutes").value) == document.getElementById("minutes").value)) {
-                if (document.getElementById("seconds").value >= 0) {
+                if ((document.getElementById("seconds").value >= 0) && (document.getElementById("minutes").value >= 0)) {
                     isTimeSet = true;
                     var seconds = document.getElementById("seconds").value;
                     var minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
