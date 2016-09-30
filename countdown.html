@@ -29,7 +29,6 @@
     var i;
     var time = 0;
     var running = false;
-    var isTimeSet = false;
     var isCountdownSet = false;
     var audio = new Audio('scream.mp3');
 
@@ -60,11 +59,9 @@
 
     function setCountdown() {
         if (running == false) {
-
             if (((Math.floor(document.getElementById("seconds").value) == document.getElementById("seconds").value)) && (Math.floor(document.getElementById("minutes").value) == document.getElementById("minutes").value)) {
                 if (!(document.getElementById("seconds").value < 0) && !(document.getElementById("minutes").value < 0)) {
                     if ((document.getElementById("seconds").value != 0) && (document.getElementById("seconds").value != 0)) {
-                        isTimeSet = true;
                         var seconds = document.getElementById("seconds").value;
                         var minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
                         var hours = Math.floor(document.getElementById("minutes").value / 60);
@@ -135,9 +132,15 @@
 
             document.getElementById("timer").innerHTML = displayHours + hours +
                     displayMinutes + minutes + displaySeconds + seconds;
-            if(time == 0) {
+
+            if (time == 0) {
                 console.log("zerooooooooo");
                 clearInterval(i);
+                document.getElementById("startPause").innerHTML = "Start";
+                document.getElementById("seconds").value = 0;
+                document.getElementById("minutes").value = 0;
+                running = false;
+
                 audio.play();
             }
         }, 1000);
