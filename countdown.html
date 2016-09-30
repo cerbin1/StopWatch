@@ -101,19 +101,18 @@
         } else {
             console.log("odpalilem");
             running = true;
-            decrement();
             document.getElementById("startPause").innerHTML = "Pause";
+            decrement();
         }
     }
     function decrement() {
-        dupa = time;
-        console.log(dupa);
+        console.log(time);
         i = setInterval(function () {
-            dupa--;
+            time--;
 
-            hours = Math.floor(dupa / 3600);
-            minutes = Math.floor(dupa / 60) % 60;
-            seconds = dupa % 60;
+            var hours = Math.floor(time / 3600);
+            minutes = Math.floor(time / 60) % 60;
+            seconds = time % 60;
 
 
             var displaySeconds = ":";
