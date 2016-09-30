@@ -110,10 +110,10 @@
         i = setInterval(function () {
             time--;
 
+            console.log(time);
             var hours = Math.floor(time / 3600);
             minutes = Math.floor(time / 60) % 60;
             seconds = time % 60;
-
 
             var displaySeconds = ":";
             var displayMinutes = ":";
@@ -134,6 +134,10 @@
 
             document.getElementById("timer").innerHTML = displayHours + hours +
                     displayMinutes + minutes + displaySeconds + seconds;
+            if(time == 0) {
+                console.log("zerooooooooo");
+                clearInterval(i);
+            }
         }, 1000);
     }
 </script>
