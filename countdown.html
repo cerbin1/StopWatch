@@ -32,30 +32,6 @@
     var isCountdownSet = false;
     var audio = new Audio('scream.mp3');
 
-    function displayCountDown(seconds, minutes, hours) {
-
-        seconds = document.getElementById("seconds").value;
-        minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
-        hours = Math.floor(document.getElementById("minutes").value / 60);
-        var displaySeconds = ":";
-        var displayMinutes = ":";
-        var displayHours = "";
-
-        if (seconds < 10) {
-            displaySeconds = ":0";
-        }
-        if (seconds % 60 == 0) {
-            displaySeconds = ":0";
-        }
-        if (minutes < 10) {
-            displayMinutes = ":0";
-        }
-        if (hours < 10) {
-            displayHours = "0";
-        }
-        document.getElementById("timer").innerHTML = displayHours + hours +
-                displayMinutes + minutes + displaySeconds + seconds % 60;
-    }
 
     function setCountdown() {
         if (running == false) {
@@ -86,6 +62,30 @@
         else {
             console.log("licznik teraz dziala, nie mozna ustawic innego czasu");
         }
+    }
+
+    function displayCountDown(seconds, minutes, hours) {
+        seconds = document.getElementById("seconds").value;
+        minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
+        hours = Math.floor(document.getElementById("minutes").value / 60);
+        var displaySeconds = ":";
+        var displayMinutes = ":";
+        var displayHours = "";
+
+        if (seconds < 10) {
+            displaySeconds = ":0";
+        }
+        if (seconds % 60 == 0) {
+            displaySeconds = ":0";
+        }
+        if (minutes < 10) {
+            displayMinutes = ":0";
+        }
+        if (hours < 10) {
+            displayHours = "0";
+        }
+        document.getElementById("timer").innerHTML = displayHours + hours +
+                displayMinutes + minutes + displaySeconds + seconds % 60;
     }
     function startPause() {
         if (running) {
@@ -137,10 +137,9 @@
                 console.log("zerooooooooo");
                 clearInterval(i);
                 document.getElementById("startPause").innerHTML = "Start";
-                document.getElementById("seconds").value = 0;
-                document.getElementById("minutes").value = 0;
+                time = +document.getElementById("seconds").value + document.getElementById("minutes").value * 60;
+                isCountdownSet = false;
                 running = false;
-
                 audio.play();
             }
         }, 1000);
