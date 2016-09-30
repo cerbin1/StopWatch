@@ -90,25 +90,19 @@
         }
     }
     function startPause() {
-        if (isCountdownSet == false) {
-            console.log("uzytkownik nie wprowadzil zadnych wartosci");
-        }
-        else if (running) {
+        if (running) {
             running = false;
             clearInterval(i);
             document.getElementById("startPause").innerHTML = "Resume";
             console.log("zapausowalem");
         }
-        else {
-            if (isCountdownSet) {
-                console.log("odpalilem");
-                running = true;
-                decrement();
-                document.getElementById("startPause").innerHTML = "Pause";
-            }
-            else {
-                console.log("ddd");
-            }
+        else if (time == 0) {
+            console.log("uzytkownik nie wprowadzil zadnych wartosci");
+        } else {
+            console.log("odpalilem");
+            running = true;
+            decrement();
+            document.getElementById("startPause").innerHTML = "Pause";
         }
     }
     function decrement() {
