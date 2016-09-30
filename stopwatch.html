@@ -43,6 +43,16 @@
             document.getElementById("startPause").innerHTML = "Pause";
         }
     }
+
+    function addZero(number) {
+        if (number < 10) {
+            return "0" + number;
+        }
+        else {
+            return number;
+        }
+    }
+
     function increment() {
         if (running) {
             i = setInterval(function () {
@@ -50,15 +60,7 @@
                 milliseconds = time % 100;
                 seconds = Math.floor(time / 100) % 60;
                 minutes = Math.floor(time / 100 / 60);
-
-                if (minutes < 10) {
-                    minutes = "0" + minutes;
-                }
-                if (seconds < 10) {
-                    seconds = "0" + seconds;
-                }
-
-                document.getElementById("timer").innerHTML = minutes + ":" + seconds + ":" + milliseconds;
+                document.getElementById("timer").innerHTML = addZero(minutes) + ":" + addZero(seconds) + ":" + addZero(milliseconds);
             }, 10);
         }
     }
