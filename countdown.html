@@ -27,9 +27,6 @@
 </div>
 <script>
     var i;
-    var seconds;
-    var minutes;
-    var hours;
     var time = 0;
     var running = false;
     var isTimeSet = false;
@@ -75,8 +72,6 @@
 
                         isCountdownSet = true;
                         time = +document.getElementById("seconds").value + document.getElementById("minutes").value * 60;
-
-
                     }
                     else {
                         console.log("Musisz wpisac jakis czas, nie moze byc zerowy");
@@ -112,7 +107,7 @@
                 document.getElementById("startPause").innerHTML = "Pause";
             }
             else {
-                console.log("33")
+                console.log("ddd");
             }
         }
     }
