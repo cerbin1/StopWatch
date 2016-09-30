@@ -33,38 +33,44 @@
     var time = 0;
     var running = false;
     var isTimeSet = false;
-    var dd = 0;
+    var isCountdownSet = false;
 
     function displayNumberToCountdown() {
         if (running == false) {
-            if (document.getElementById("seconds").value >= 0) {
-                isTimeSet = true;
-                var seconds = document.getElementById("seconds").value;
-                var minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
-                var hours = Math.floor(document.getElementById("minutes").value / 60);
-                var displaySeconds = ":";
-                var displayMinutes = ":";
-                var displayHours = "";
+            if (((Math.floor(document.getElementById("seconds").value) == document.getElementById("seconds").value)) && (Math.floor(document.getElementById("minutes").value) == document.getElementById("minutes").value)) {
+                if (document.getElementById("seconds").value >= 0) {
+                    isTimeSet = true;
+                    var seconds = document.getElementById("seconds").value;
+                    var minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
+                    var hours = Math.floor(document.getElementById("minutes").value / 60);
+                    var displaySeconds = ":";
+                    var displayMinutes = ":";
+                    var displayHours = "";
 
-                if (seconds < 10) {
-                    displaySeconds = ":0";
-                }
-                if (seconds % 60 == 0) {
-                    displaySeconds = ":0";
-                }
-                if (minutes < 10) {
-                    displayMinutes = ":0";
-                }
-                if (hours < 10) {
-                    displayHours = "0";
-                }
+                    if (seconds < 10) {
+                        displaySeconds = ":0";
+                    }
+                    if (seconds % 60 == 0) {
+                        displaySeconds = ":0";
+                    }
+                    if (minutes < 10) {
+                        displayMinutes = ":0";
+                    }
+                    if (hours < 10) {
+                        displayHours = "0";
+                    }
+                    isCountdownSet = true;
+                    time = +document.getElementById("seconds").value + document.getElementById("minutes").value * 60;
 
-                document.getElementById("timer").innerHTML = displayHours + hours +
-                        displayMinutes + minutes + displaySeconds + seconds % 60;
+                    document.getElementById("timer").innerHTML = displayHours + hours +
+                            displayMinutes + minutes + displaySeconds + seconds % 60;
+                }
+                else {
+                    console.log("nie moze byc ujemnego czasu");
+                }
             }
             else {
-//                alert("You can't input negative time");
-                console.log("nie moze byc ujemnego czasu")
+                console.log("wpisane liczby nie sa liczbami calkowitymi");
             }
         }
         else {
@@ -76,44 +82,31 @@
             running = false;
             clearInterval(i);
             document.getElementById("startPause").innerHTML = "Resume";
+            console.log("zapausowalem");
+        }
+        else if ((document.getElementById("seconds").value == 0) && (document.getElementById("seconds").value == 0)) {
+            console.log("jest 0")
         }
         else {
-            running = true;
-            decrement();
-            document.getElementById("startPause").innerHTML = "Pause";
+            if (isCountdownSet) {
+                console.log("odpalilem");
+                running = true;
+                decrement();
+                document.getElementById("startPause").innerHTML = "Pause";
+            }
+            else {
+                console.log("")
+            }
         }
     }
-
-    /*var running = false;
-     var time = 0;
-     var milliseconds = 0;
-     var seconds = 0;
-     var minutes = 0;
-     var i;
-     function startPause() {
-     if (running) {
-     running = false;
-     clearInterval(i);
-     document.getElementById("startPause").innerHTML = "Resume";
-     }
-     else {
-     running = true;
-     increment();
-     document.getElementById("startPause").innerHTML = "Pause";
-     }
-     }*/
     function decrement() {
-        if (dd == 0) {
-            time = +document.getElementById("seconds").value + document.getElementById("minutes").value * 60;
-            dupa = time;
-            console.log(dupa);
-            dd = 1;
-        }
+        dupa = time;
+        console.log(dupa);
         i = setInterval(function () {
             dupa--;
 
-            hours = Math.round(dupa / 3600);
-            minutes = Math.round(dupa / 60) % 60;
+            hours = Math.floor(dupa / 3600);
+            minutes = Math.floor(dupa / 60) % 60;
             seconds = dupa % 60;
 
 
