@@ -61,7 +61,7 @@
                 seconds = Math.floor(time / 100) % 60;
                 minutes = Math.floor(time / 100 / 60);
                 document.getElementById("timer").innerHTML = addZero(minutes) + ":" + addZero(seconds) + ":" + addZero(milliseconds);
-            }, 10);
+            }, 10); //TODO change the way of getting time
         }
     }
 
