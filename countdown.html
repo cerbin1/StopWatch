@@ -37,7 +37,7 @@
         if (running == false) {
             if (((Math.floor(document.getElementById("seconds").value) == document.getElementById("seconds").value)) && (Math.floor(document.getElementById("minutes").value) == document.getElementById("minutes").value)) {
                 if (!(document.getElementById("seconds").value < 0) && !(document.getElementById("minutes").value < 0)) {
-                    if ((document.getElementById("seconds").value != 0) && (document.getElementById("seconds").value != 0)) {
+                    if ((document.getElementById("seconds").value != 0) || (document.getElementById("minutes").value != 0)) {
                         var seconds = document.getElementById("seconds").value;
                         var minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
                         var hours = Math.floor(document.getElementById("minutes").value / 60);
@@ -142,6 +142,16 @@
                 audio.play();
             }
         }, 1000);
+    }
+    function reset() {
+        running = false;
+        isCountdownSet = false;
+        clearInterval(i);
+        document.getElementById("minutes").value = 0;
+        document.getElementById("seconds").value = 0;
+        document.getElementById("startPause").innerHTML = "Start";
+        document.getElementById("timer").innerHTML = "00:00:00";
+        time = 0;
     }
 </script>
 </body>
