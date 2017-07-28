@@ -11,8 +11,8 @@
     <div id="timer" class="buttons">00:00:00</div>
     <div class="navbar">
         <ul>
-            <li id="startPause" onclick="startPause()">Start</li>
-            <li id="reset" onclick="reset()">Reset</li>
+            <li id="startPause" onclick="toggleStopwatch()">Start</li>
+            <li id="reset" onclick="resetStopwatch()">Reset</li>
             <li id="lap" onclick="displayLap()">Lap</li>
             <li id="clear" class="clearLapsButton" onclick="clearLaps()">Clear laps</li>
         </ul>
@@ -29,48 +29,46 @@
     var milliseconds = 0;
     var seconds = 0;
     var minutes = 0;
-    var i;
+    var interval;
 
-    function startPause() {
+    function toggleStopwatch() {
         if (running) {
             running = false;
-            clearInterval(i);
+            clearInterval(interval);
             document.getElementById("startPause").innerHTML = "Resume";
         }
         else {
             running = true;
-            increment();
+            runStopwatch();
             document.getElementById("startPause").innerHTML = "Pause";
         }
     }
 
-    function addZero(number) {
-        if (number < 10) {
-            return "0" + number;
-        }
-        else {
-            return number;
-        }
+    function addAdditionalZeroIfNeeded(timeUnit) {
+        return ((timeUnit < 10) ? "0" + timeUnit : timeUnit);
     }
 
-    function increment() {
+    function runStopwatch() {
         if (running) {
-            i = setInterval(function () {
+            interval = setInterval(function () {
                 time++;
                 milliseconds = time % 100;
                 seconds = Math.floor(time / 100) % 60;
                 minutes = Math.floor(time / 100 / 60);
-                document.getElementById("timer").innerHTML = addZero(minutes) + ":" + addZero(seconds) + ":" + addZero(milliseconds);
+                document.getElementById("timer").innerHTML =
+                    addAdditionalZeroIfNeeded(minutes)
+                    + ":" + addAdditionalZeroIfNeeded(seconds)
+                    + ":" + addAdditionalZeroIfNeeded(milliseconds);
             }, 10); //TODO change the way of getting time
         }
     }
 
-    function reset() {
+    function resetStopwatch() {
         time = 0;
         milliseconds = 0;
         seconds = 0;
         minutes = 0;
-        clearInterval(i);
+        clearInterval(interval);
         running = false;
         document.getElementById("startPause").innerHTML = "Start";
         document.getElementById("timer").innerHTML = "00:00:00";
@@ -78,8 +76,8 @@
 
     function displayLap() {
         numberOfLap++;
-        var str = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds / 10 + "\n";
-        document.getElementById("outputLaps").innerHTML += str + "</br>";
+        var lap = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds / 10 + "\n";
+        document.getElementById("outputLaps").innerHTML += lap + "</br>";
     }
 
     function clearLaps() {
