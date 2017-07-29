@@ -24,14 +24,16 @@
 </div>
 <script>
     var running = false;
-    var time = 0;
-    var numberOfLap = 0;
+
     var milliseconds = 0;
     var seconds = 0;
     var minutes = 0;
+
     var interval;
     var startTime;
     var timePaused = 0;
+
+    var numberOfLap = 0;
 
     function toggleStopwatch() {
         if (running) {
