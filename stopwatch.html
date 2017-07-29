@@ -51,7 +51,7 @@
     }
 
     function addAdditionalZeroIfNeeded(timeUnit) {
-        return ((timeUnit < 10) ? "0" + timeUnit : timeUnit);
+        return ((timeUnit < 10) ? '0' + timeUnit : timeUnit);
     }
 
 
@@ -64,8 +64,8 @@
                 minutes = Math.floor(timePassed / 1000 / 60);
                 $('#timer').text(
                     addAdditionalZeroIfNeeded(minutes)
-                    + ":" + addAdditionalZeroIfNeeded(seconds)
-                    + ":" + addAdditionalZeroIfNeeded(milliseconds));
+                    + ':' + addAdditionalZeroIfNeeded(seconds)
+                    + ':' + addAdditionalZeroIfNeeded(milliseconds));
             }, 10);
         }
     }
@@ -83,7 +83,7 @@
 
     function displayLap() {
         numberOfLap++;
-        var lap = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds + "\n";
+        var lap = 'Number of lap: ' + numberOfLap + ' time: ' + minutes + ':' + seconds + ':0' + milliseconds;
         $('#outputLaps').append(lap).append('<br>');
     }
 
