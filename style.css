@@ -93,3 +93,7 @@ input {
 .backButton a {
     color: blue;
 }
+
+.center {
+    text-align: center;
+}
