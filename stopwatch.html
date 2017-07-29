@@ -40,13 +40,13 @@
             timePaused = Date.now() - startTime;
             running = false;
             clearInterval(interval);
-            document.getElementById("startPause").innerHTML = "Resume";
+            $('#startPause').text('Resume');
         }
         else {
             running = true;
             startTime = Date.now() - timePaused;
             runStopwatch();
-            document.getElementById("startPause").innerHTML = "Pause";
+            $('#startPause').text('Pause');
         }
     }
 
@@ -62,10 +62,10 @@
                 milliseconds = timePassed % 1000;
                 seconds = Math.floor(timePassed / 1000) % 60;
                 minutes = Math.floor(timePassed / 1000 / 60);
-                document.getElementById("timer").innerHTML =
+                $('#timer').text(
                     addAdditionalZeroIfNeeded(minutes)
                     + ":" + addAdditionalZeroIfNeeded(seconds)
-                    + ":" + addAdditionalZeroIfNeeded(milliseconds);
+                    + ":" + addAdditionalZeroIfNeeded(milliseconds));
             }, 10);
         }
     }
@@ -77,19 +77,19 @@
         minutes = 0;
         clearInterval(interval);
         running = false;
-        document.getElementById("startPause").innerHTML = "Start";
-        document.getElementById("timer").innerHTML = "00:00:00";
+        $('#startPause').text('Start');
+        $('#timer').text('00:00:00');
     }
 
     function displayLap() {
         numberOfLap++;
-        var lap = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds / 10 + "\n";
-        document.getElementById("outputLaps").innerHTML += lap + "</br>";
+        var lap = "Number of lap: " + numberOfLap + " time: " + minutes + ":" + seconds + ":0" + milliseconds + "\n";
+        $('#outputLaps').append(lap).append('<br>');
     }
 
     function clearLaps() {
         numberOfLap = 0;
-        document.getElementById("outputLaps").innerHTML = "";
+        $('#outputLaps').text('');
     }
 </script>
 </body>
