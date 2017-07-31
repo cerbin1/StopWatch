@@ -10,63 +10,51 @@
 <div class="container">
     <div id="timer" class="buttons">00:00:00</div>
     <div class="navbar">
-        <ul class = "countdown-buttons">
-            <li id="startPause" class = "centering-buttons" onclick="startPause()">Start</li>
+        <ul class="countdown-buttons">
+            <li id="startPause" class="centering-buttons" onclick="startPause()">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
         </ul>
     </div>
 
-    <p id="here"></p>
-
     <div class="backButton"><a href="index.html">Back</a></div>
-    <div id=""></div>
-    <label for="">Minutes<input id="minutes" type="number" value="0"></label>
-    <label for="">Seconds<input id="seconds" type="number" value="0"></label>
-    <input class = "input-button" type="button" onclick="setCountdown()" value="Set">
+    <label>Minutes<input id="minutes" type="number" value="0"></label>
+    <label>Seconds<input id="seconds" type="number" value="0"></label>
+    <input class="input-button" type="button" onclick="setCountdown()" value="Set">
 
 </div>
 <script>
-    var i;
+    var interval;
     var time = 0;
     var running = false;
     var isCountdownSet = false;
     var soundEffect = new Audio('sound/phone_sound_effect.mp3');
 
+    var seconds;
+    var minutes;
+    var hours;
+
     function setCountdown() {
-        if (running == false) {
-            if (((Math.floor(document.getElementById("seconds").value) == document.getElementById("seconds").value)) && (Math.floor(document.getElementById("minutes").value) == document.getElementById("minutes").value)) {
-                if (!(document.getElementById("seconds").value < 0) && !(document.getElementById("minutes").value < 0)) {
-                    if ((document.getElementById("seconds").value != 0) || (document.getElementById("minutes").value != 0)) {
-                        var seconds = document.getElementById("seconds").value;
-                        var minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
-                        var hours = Math.floor(document.getElementById("minutes").value / 60);
-
-                        displayCountDown(seconds, minutes, hours);
-
-                        isCountdownSet = true;
-                        time = +document.getElementById("seconds").value + document.getElementById("minutes").value * 60;
-                    }
-                    else {
-                        console.log("Musisz wpisac jakis czas, nie moze byc zerowy");
-                    }
-                }
-                else {
-                    console.log("nie moze byc ujemnego czasu");
-                }
-            }
-            else {
-                console.log("wpisane liczby nie sa liczbami calkowitymi");
-            }
-        }
-        else {
+        if (running) {
             console.log("licznik teraz dziala, nie mozna ustawic innego czasu");
+        } else {
+            seconds = parseInt($('#seconds').val(), 10);
+            minutes = parseInt($('#minutes').val(), 10);
+            hours = Math.floor(minutes / 60);
+
+            if (seconds < 0 || minutes < 0) {
+                console.log("nie moze byc ujemnego czasu");
+            } else if (seconds === 0 && minutes === 0) {
+                console.log("Musisz wpisac jakis czas, nie moze byc zerowy");
+            } else {
+                displayTimer();
+
+                isCountdownSet = true;
+                time = +seconds + minutes * 60;
+            }
         }
     }
 
-    function displayCountDown(seconds, minutes, hours) {
-        seconds = document.getElementById("seconds").value;
-        minutes = (+document.getElementById("minutes").value + Math.floor(seconds / 60)) % 60;
-        hours = Math.floor(document.getElementById("minutes").value / 60);
+    function displayTimer() {
         var displaySeconds = ":";
         var displayMinutes = ":";
         var displayHours = "";
@@ -74,7 +62,7 @@
         if (seconds < 10) {
             displaySeconds = ":0";
         }
-        if (seconds % 60 == 0) {
+        if (seconds % 60 === 0) {
             displaySeconds = ":0";
         }
         if (minutes < 10) {
@@ -83,17 +71,18 @@
         if (hours < 10) {
             displayHours = "0";
         }
-        document.getElementById("timer").innerHTML = displayHours + hours +
-                displayMinutes + minutes + displaySeconds + seconds % 60;
+        $('#timer').text(displayHours + hours +
+            displayMinutes + minutes + displaySeconds + seconds % 60);
     }
+
     function startPause() {
         if (running) {
             running = false;
-            clearInterval(i);
+            clearInterval(interval);
             document.getElementById("startPause").innerHTML = "Resume";
             console.log("zapausowalem");
         }
-        else if (time == 0) {
+        else if (time === 0) {
             console.log("uzytkownik nie wprowadzil zadnych wartosci");
         } else {
             console.log("odpalilem");
@@ -102,9 +91,10 @@
             decrement();
         }
     }
+
     function decrement() {
         console.log(time);
-        i = setInterval(function () {
+        interval = setInterval(function () {
             time--;
 
             console.log(time);
@@ -119,7 +109,7 @@
             if (seconds < 10) {
                 displaySeconds = ":0";
             }
-            if (seconds % 60 == 0) {
+            if (seconds % 60 === 0) {
                 displaySeconds = ":0";
             }
             if (minutes < 10) {
@@ -130,11 +120,11 @@
             }
 
             document.getElementById("timer").innerHTML = displayHours + hours +
-                    displayMinutes + minutes + displaySeconds + seconds;
+                displayMinutes + minutes + displaySeconds + seconds;
 
-            if (time == 0) {
+            if (time === 0) {
                 console.log("zerooooooooo");
-                clearInterval(i);
+                clearInterval(interval);
                 document.getElementById("startPause").innerHTML = "Start";
                 isCountdownSet = false;
                 running = false;
@@ -142,10 +132,11 @@
             }
         }, 1000);
     }
+
     function reset() {
         running = false;
         isCountdownSet = false;
-        clearInterval(i);
+        clearInterval(interval);
         document.getElementById("minutes").value = 0;
         document.getElementById("seconds").value = 0;
         document.getElementById("startPause").innerHTML = "Start";
