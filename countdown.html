@@ -8,10 +8,10 @@
 </head>
 <body>
 <div class="container">
-    <div id="timer" class="buttons">00:00:00</div>
+    <div id="timer" class="buttons">00:00:00:0</div>
     <div class="navbar">
         <ul class="countdown-buttons">
-            <li id="startPause" class="centering-buttons" onclick="startPause()">Start</li>
+            <li id="startPause" class="centering-buttons" onclick="toggleTimer()">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
         </ul>
     </div>
@@ -29,17 +29,21 @@
     var isCountdownSet = false;
     var soundEffect = new Audio('sound/phone_sound_effect.mp3');
 
+    var milliseconds;
     var seconds;
     var minutes;
     var hours;
+
+    var finished = false;
 
     function setCountdown() {
         if (running) {
             console.log("licznik teraz dziala, nie mozna ustawic innego czasu");
         } else {
+            milliseconds = 0;
             seconds = parseInt($('#seconds').val(), 10);
             minutes = parseInt($('#minutes').val(), 10);
-            hours = Math.floor(minutes / 60);
+            hours = minutes / 60;
 
             if (seconds < 0 || minutes < 0) {
                 console.log("nie moze byc ujemnego czasu");
@@ -47,14 +51,18 @@
                 console.log("Musisz wpisac jakis czas, nie moze byc zerowy");
             } else {
                 displayTimer();
-
                 isCountdownSet = true;
-                time = +seconds + minutes * 60;
+                time = +(seconds + minutes * 60) * 10;
             }
         }
     }
 
     function displayTimer() {
+        $('#timer').text(getTimeToDisplay());
+    }
+
+    function getTimeToDisplay() {
+        var displayMilliseconds = ":";
         var displaySeconds = ":";
         var displayMinutes = ":";
         var displayHours = "";
@@ -71,76 +79,62 @@
         if (hours < 10) {
             displayHours = "0";
         }
-        $('#timer').text(displayHours + hours +
-            displayMinutes + minutes + displaySeconds + seconds % 60);
+        return displayHours + hours +
+            displayMinutes + minutes + displaySeconds + seconds + displayMilliseconds + milliseconds;
     }
 
-    function startPause() {
-        if (running) {
-            running = false;
-            clearInterval(interval);
-            document.getElementById("startPause").innerHTML = "Resume";
-            console.log("zapausowalem");
+    function toggleTimer() {
+        if (isCountdownSet) {
+            if (running) {
+                running = false;
+                clearInterval(interval);
+                $('#startPause').text('Resume');
+                console.log("zapausowalem");
+            } else {
+                console.log("odpalilem");
+                running = true;
+                $('#startPause').text('Pause');
+                decrement();
+            }
         }
-        else if (time === 0) {
+        else {
             console.log("uzytkownik nie wprowadzil zadnych wartosci");
-        } else {
-            console.log("odpalilem");
-            running = true;
-            document.getElementById("startPause").innerHTML = "Pause";
-            decrement();
         }
+    }
+
+    function stopTimer() {
+        clearInterval(interval);
+        $('#startPause').text('Start');
+        isCountdownSet = false;
+        running = false;
+        finished = true;
     }
 
     function decrement() {
-        console.log(time);
         interval = setInterval(function () {
             time--;
 
             console.log(time);
-            var hours = Math.floor(time / 3600);
-            minutes = Math.floor(time / 60) % 60;
-            seconds = time % 60;
+            hours = Math.floor(time / 36000);
+            minutes = Math.floor(time / 600) % 60;
+            seconds = Math.floor(time / 10) % 60;
+            milliseconds = seconds / 10;
 
-            var displaySeconds = ":";
-            var displayMinutes = ":";
-            var displayHours = "";
-
-            if (seconds < 10) {
-                displaySeconds = ":0";
-            }
-            if (seconds % 60 === 0) {
-                displaySeconds = ":0";
-            }
-            if (minutes < 10) {
-                displayMinutes = ":0";
-            }
-            if (hours < 10) {
-                displayHours = "0";
-            }
-
-            document.getElementById("timer").innerHTML = displayHours + hours +
-                displayMinutes + minutes + displaySeconds + seconds;
+            $('#timer').text(getTimeToDisplay());
 
             if (time === 0) {
                 console.log("zerooooooooo");
-                clearInterval(interval);
-                document.getElementById("startPause").innerHTML = "Start";
-                isCountdownSet = false;
-                running = false;
+                stopTimer();
                 soundEffect.play();
             }
-        }, 1000);
+        }, 100);
     }
 
     function reset() {
-        running = false;
-        isCountdownSet = false;
-        clearInterval(interval);
-        document.getElementById("minutes").value = 0;
-        document.getElementById("seconds").value = 0;
-        document.getElementById("startPause").innerHTML = "Start";
-        document.getElementById("timer").innerHTML = "00:00:00";
+        stopTimer();
+        $('#seconds').val(0);
+        $('#minutes').val(0);
+        $('#timer').text('00:00:00:');
         time = 0;
     }
 </script>
