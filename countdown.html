@@ -11,7 +11,7 @@
     <div id="timer" class="buttons">00:00:00</div>
     <div class="navbar">
         <ul class="countdown-buttons">
-            <li id="run-timer" class="centering-buttons">Start</li>
+            <li id="run-timer" onclick="runTimer()" class="centering-buttons">Start</li>
             <li id="reset" onclick="reset()">Reset</li>
         </ul>
     </div>
@@ -39,14 +39,12 @@
 
     var timeToCountDown;
 
-    $('#run-timer').on('click', runTimer);
-
     function setCountdown() {
         if (running) {
             console.log("Timer is running");
         } else {
-            secondsValue = parseInt($('#seconds').val(), 10);
-            minutesValue = parseInt($('#minutes').val(), 10);
+            var secondsValue = parseInt($('#seconds').val(), 10);
+            var minutesValue = parseInt($('#minutes').val(), 10);
 
             timeToCountDownInMillis = (minutesValue * 60 + secondsValue) * 1000;
             console.log(timeToCountDownInMillis);
@@ -56,7 +54,9 @@
             hours = Math.floor(timeToCountDownInMillis / 1000 / 60 / 60);
 
 
-            if (seconds < 0 || minutes < 0) {
+            if (isNaN(secondsValue) || isNaN(minutesValue)) {
+                console.log("Not a number");
+            } else if (seconds < 0 || minutes < 0) {
                 console.log("Time can not be negative");
             } else if (seconds === 0 && minutes === 0 && hours === 0) {
                 console.log("Timer can not be zero");
@@ -94,6 +94,7 @@
                 timeToCountDown = new Date().getTime() + timeToCountDownInMillis;
                 $('#run-timer').text('Pause');
                 startTimer();
+                finished = false;
             } else {
                 console.log("Set new timer");
             }
@@ -105,37 +106,38 @@
 
     function toggleTimer() {
         if (running) {
-            running = false;
+            changeStatusOfTimer();
             clearInterval(interval);
-            $('#run-timer').text('Resume');
             console.log("Paused");
         } else {
-            running = true;
+            changeStatusOfTimer();
             startTimer();
-            $('#run-timer').text('Pause');
             console.log("Unaused");
             console.log(timeToCountDown);
         }
     }
 
+    function changeStatusOfTimer() {
+        running = !running;
+        $('#run-timer').text(running ? 'Resume' : 'Pause');
+    }
+
     function startTimer() {
         interval = setInterval(function () {
-
             var test = timeToCountDown - new Date().getTime();
             hours = Math.floor(test / 3600000);
             minutes = Math.floor(test / 60000) % 60;
             seconds = Math.floor(test / 1000) % 60;
 
             console.log(test);
-
-            $('#timer').text(getTimeToDisplay());
+            var timerDiv = $('#timer');
+            timerDiv.text(getTimeToDisplay());
 
             if (test < 0) {
                 console.log("Finished countdown");
-                $('#timer').text('00:00:00');
+                timerDiv.text('00:00:00');
                 stopTimer();
                 soundEffect.play();
-                clearInterval(interval);
             }
         }, 100);
     }
