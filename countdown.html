@@ -26,7 +26,7 @@
     var soundEffect = new Audio('sound/phone_sound_effect.mp3');
 
     var running = false;
-    var isCountdownSet = false;
+    var countDownSet = false;
     var finished = true;
 
     var interval;
@@ -64,7 +64,7 @@
             } else {
                 displayTime(getTimeToDisplay());
                 displayTime(getTimeToDisplay());
-                isCountdownSet = true;
+                countDownSet = true;
             }
         }
     }
@@ -77,7 +77,7 @@
 
     function runTimer() {
         if (finished) {
-            if (isCountdownSet) {
+            if (countDownSet) {
                 timeToCountDown = new Date().getTime() + timeToCountDownInMillis;
                 $('#run-timer').text('Pause');
                 startTimer();
@@ -131,7 +131,7 @@
     function stopTimer() {
         clearInterval(interval);
         $('#run-timer').text('Start');
-        isCountdownSet = false;
+        countDownSet = false;
         running = false;
         finished = true;
     }
