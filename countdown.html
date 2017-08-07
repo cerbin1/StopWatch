@@ -70,24 +70,9 @@
     }
 
     function getTimeToDisplay() {
-        var displaySeconds = ":";
-        var displayMinutes = ":";
-        var displayHours = "";
-
-        if (seconds < 10) {
-            displaySeconds = ":0";
-        }
-        if (seconds % 60 === 0) {
-            displaySeconds = ":0";
-        }
-        if (minutes < 10) {
-            displayMinutes = ":0";
-        }
-        if (hours < 10) {
-            displayHours = "0";
-        }
-        return displayHours + hours +
-            displayMinutes + minutes + displaySeconds + seconds;
+        return (hours < 10 ? "0" : "") + hours
+            + (minutes < 10 ? ":0" : ":") + minutes
+            + (seconds < 10 ? ":0" : ":") + seconds;
     }
 
     function runTimer() {
