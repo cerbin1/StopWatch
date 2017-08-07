@@ -23,21 +23,22 @@
 
 </div>
 <script>
-    var interval;
+    var soundEffect = new Audio('sound/phone_sound_effect.mp3');
 
     var running = false;
     var isCountdownSet = false;
-    var soundEffect = new Audio('sound/phone_sound_effect.mp3');
-
-    var seconds;
-    var minutes;
-    var hours;
-
-    var timeToCountDownInMillis;
-
     var finished = true;
 
+    var interval;
+
+    var seconds, minutes, hours;
+
+    var timeToCountDownInMillis;
     var timeToCountDown;
+
+    function displayTime(timeToDisplay) {
+        $('#timer').text(timeToDisplay);
+    }
 
     function setCountdown() {
         if (running) {
@@ -61,7 +62,8 @@
             } else if (seconds === 0 && minutes === 0 && hours === 0) {
                 console.log("Timer can not be zero");
             } else {
-                $('#timer').text(getTimeToDisplay());
+                displayTime(getTimeToDisplay());
+                displayTime(getTimeToDisplay());
                 isCountdownSet = true;
             }
         }
@@ -130,12 +132,11 @@
             seconds = Math.floor(test / 1000) % 60;
 
             console.log(test);
-            var timerDiv = $('#timer');
-            timerDiv.text(getTimeToDisplay());
+            displayTime(getTimeToDisplay());
 
             if (test < 0) {
                 console.log("Finished countdown");
-                timerDiv.text('00:00:00');
+                displayTime('00:00:00');
                 stopTimer();
                 soundEffect.play();
             }
