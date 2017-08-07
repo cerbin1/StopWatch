@@ -41,9 +41,7 @@
     }
 
     function setCountdown() {
-        if (running) {
-            console.log("Timer is running");
-        } else {
+        if (finished) {
             var secondsValue = parseInt($('#seconds').val(), 10);
             var minutesValue = parseInt($('#minutes').val(), 10);
 
@@ -54,7 +52,6 @@
             minutes = Math.floor(timeToCountDownInMillis / 1000 / 60) % 60;
             hours = Math.floor(timeToCountDownInMillis / 1000 / 60 / 60);
 
-
             if (isNaN(secondsValue) || isNaN(minutesValue)) {
                 console.log("Not a number");
             } else if (seconds < 0 || minutes < 0) {
@@ -63,9 +60,10 @@
                 console.log("Timer can not be zero");
             } else {
                 displayTime(getTimeToDisplay());
-                displayTime(getTimeToDisplay());
                 countDownSet = true;
             }
+        } else {
+            console.log("Timer is running");
         }
     }
 
@@ -94,15 +92,14 @@
 
     function toggleTimer() {
         if (running) {
-            changeStatusOfTimer();
             clearInterval(interval);
             console.log("Paused");
         } else {
-            changeStatusOfTimer();
             startTimer();
-            console.log("Unaused");
+            console.log("UnPaused");
             console.log(timeToCountDown);
         }
+        changeStatusOfTimer();
     }
 
     function changeStatusOfTimer() {
@@ -112,15 +109,15 @@
 
     function startTimer() {
         interval = setInterval(function () {
-            var test = timeToCountDown - new Date().getTime();
-            hours = Math.floor(test / 3600000);
-            minutes = Math.floor(test / 60000) % 60;
-            seconds = Math.floor(test / 1000) % 60;
+            var timeLeftToCountDown = timeToCountDown - new Date().getTime();
+            hours = Math.floor(timeLeftToCountDown / 3600000);
+            minutes = Math.floor(timeLeftToCountDown / 60000) % 60;
+            seconds = Math.floor(timeLeftToCountDown / 1000) % 60;
 
-            console.log(test);
+            console.log(timeLeftToCountDown);
             displayTime(getTimeToDisplay());
 
-            if (test <= 0) {
+            if (timeLeftToCountDown <= 0) {
                 console.log("Finished countdown");
                 displayTime('00:00:00');
                 stopTimer();
