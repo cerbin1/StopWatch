@@ -89,15 +89,18 @@
             toggleTimer();
         }
     }
+    var dupa;
 
     function toggleTimer() {
         if (running) {
             clearInterval(interval);
             console.log("Paused");
+            dupa = new Date().getTime();
         } else {
             startTimer();
             console.log("UnPaused");
             console.log(timeToCountDown);
+            timeToCountDown += new Date().getTime() - dupa;
         }
         changeStatusOfTimer();
     }
