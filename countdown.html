@@ -4,23 +4,26 @@
     <title>Countdown</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <div id="timer" class="buttons">00:00:00</div>
-    <div class="navbar">
-        <ul class="countdown-buttons">
-            <li id="run-timer" onclick="runTimer()" class="centering-buttons">Start</li>
-            <li id="reset" onclick="reset()">Reset</li>
-        </ul>
+    <div class="row col-md-6 col-md-offset-3 top-buffer">
+        <div id="timer" class="large-font text-center">00:00:00</div>
     </div>
-
-    <div class="backButton"><a href="index.html">Back</a></div>
-    <label>Minutes<input id="minutes" type="number" value="0"></label>
-    <label>Seconds<input id="seconds" type="number" value="0"></label>
-    <input class="input-button" type="button" onclick="setCountdown()" value="Set">
-
+    <div class="row col-md-6 col-md-offset-3">
+        <div class="btn-group btn-group-justified">
+            <a id="run-timer" href="#" class="btn btn-default" onclick="runTimer()">Start</a>
+            <a id="reset" href="#" class="btn btn-default" onclick="setCountdown()">Set</a>
+        </div>
+    </div>
+    <div class="row col-md-6 col-md-offset-3 text-center">
+        <label for="minutesInput" class="test">Minutes</label>
+        <input id="minutesInput" type="number">
+        <label for="secondsInput" class="test">Seconds</label>
+        <input id="secondsInput" type="number">
+    </div>
 </div>
 <script>
     var soundEffect = new Audio('sound/phone_sound_effect.mp3');
@@ -42,8 +45,8 @@
 
     function setCountdown() {
         if (finished) {
-            var secondsValue = parseInt($('#seconds').val(), 10);
-            var minutesValue = parseInt($('#minutes').val(), 10);
+            var secondsValue = parseInt($('#secondsInput').val(), 10);
+            var minutesValue = parseInt($('#minutesInput').val(), 10);
 
             timeToCountDownInMillis = (minutesValue * 60 + secondsValue) * 1000;
             console.log(timeToCountDownInMillis);
@@ -89,6 +92,7 @@
             toggleTimer();
         }
     }
+
     var dupa;
 
     function toggleTimer() {
