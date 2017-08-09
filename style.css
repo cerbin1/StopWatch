@@ -91,3 +91,7 @@ input {
 .large-font {
     font-size: 100px;
 }
+
+.padding-input {
+    padding: 15px;
+}
