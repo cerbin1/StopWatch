@@ -38,6 +38,7 @@
 
     var timeToCountDownInMillis;
     var timeToCountDown;
+    var timestampWhenPaused;
 
     function displayTime(timeToDisplay) {
         $('#timer').text(timeToDisplay);
@@ -93,18 +94,16 @@
         }
     }
 
-    var dupa;
-
     function toggleTimer() {
         if (running) {
             clearInterval(interval);
             console.log("Paused");
-            dupa = new Date().getTime();
+            timestampWhenPaused = new Date().getTime();
         } else {
             startTimer();
             console.log("UnPaused");
             console.log(timeToCountDown);
-            timeToCountDown += new Date().getTime() - dupa;
+            timeToCountDown += new Date().getTime() - timestampWhenPaused;
         }
         changeStatusOfTimer();
     }
