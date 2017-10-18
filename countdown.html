@@ -49,20 +49,24 @@
             var secondsValue = parseInt($('#secondsInput').val(), 10);
             var minutesValue = parseInt($('#minutesInput').val(), 10);
 
-            timeToCountDownInMillis = (minutesValue * 60 + secondsValue) * 1000;
-            console.log(timeToCountDownInMillis);
+            if (isNaN(secondsValue)) {
+                secondsValue = 0;
+            }
+            if (isNaN(minutesValue)) {
+                minutesValue = 0;
+            }
 
-            seconds = Math.floor(timeToCountDownInMillis / 1000) % 60;
-            minutes = Math.floor(timeToCountDownInMillis / 1000 / 60) % 60;
-            hours = Math.floor(timeToCountDownInMillis / 1000 / 60 / 60);
-
-            if (isNaN(secondsValue) || isNaN(minutesValue)) {
-                console.log("Not a number");
-            } else if (seconds < 0 || minutes < 0) {
+            if (secondsValue < 0 || minutesValue < 0) {
                 console.log("Time can not be negative");
-            } else if (seconds === 0 && minutes === 0 && hours === 0) {
+            } else if (secondsValue === 0 && minutesValue === 0) {
                 console.log("Timer can not be zero");
             } else {
+                timeToCountDownInMillis = (minutesValue * 60 + secondsValue) * 1000;
+                console.log(timeToCountDownInMillis);
+
+                seconds = Math.floor(timeToCountDownInMillis / 1000) % 60;
+                minutes = Math.floor(timeToCountDownInMillis / 1000 / 60) % 60;
+                hours = Math.floor(timeToCountDownInMillis / 1000 / 60 / 60);
                 displayTime(getTimeToDisplay());
                 countDownSet = true;
             }
