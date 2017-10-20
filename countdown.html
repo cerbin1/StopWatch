@@ -43,6 +43,10 @@
 
     var resetClicksCount = 0;
 
+    $(document).ready(function () {
+        setListeners();
+    });
+
     function displayTime(timeToDisplay) {
         $('#timer').text(timeToDisplay);
     }
@@ -163,6 +167,26 @@
                 $('#minutesInput').val('');
             }
         }
+    }
+
+    function setListeners() {
+        $(document).keypress(function (key) {
+            if (key.which === 32) {
+                runTimer();
+            }
+        });
+
+        $('#secondsInput').keypress(function (key) {
+            if (key.which === 13) {
+                setCountdown();
+            }
+        });
+
+        $('#minutesInput').keypress(function (key) {
+            if (key.which === 13) {
+                setCountdown();
+            }
+        })
     }
 </script>
 </body>
