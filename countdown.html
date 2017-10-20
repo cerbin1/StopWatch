@@ -41,6 +41,8 @@
     var timeToCountDown;
     var timestampWhenPaused;
 
+    var resetClicksCount = 0;
+
     function displayTime(timeToDisplay) {
         $('#timer').text(timeToDisplay);
     }
@@ -146,11 +148,20 @@
     }
 
     function reset() {
+        function triggeredClearingInputs() {
+            return resetClicksCount % 2 === 0;
+        }
+
         if (!running) {
             stopTimer();
             $('#seconds').val(0);
             $('#minutes').val(0);
             $('#timer').text('00:00:00');
+            resetClicksCount++;
+            if (triggeredClearingInputs()) {
+                $('#secondsInput').val('');
+                $('#minutesInput').val('');
+            }
         }
     }
 </script>
