@@ -58,15 +58,17 @@ function setCountdown() {
 }
 
 function setCountdownMinutes(minutes) {
-    if ((minutes * 60) * 1000 === timeToCountDownInMillis) {
-        runTimer();
-    }
-    else {
-        timeToCountDownInMillis = (minutes * 60) * 1000;
-        console.log(timeToCountDownInMillis);
+    if (finished) {
+        if ((minutes * 60) * 1000 === timeToCountDownInMillis) {
+            runTimer();
+        }
+        else {
+            timeToCountDownInMillis = (minutes * 60) * 1000;
+            console.log(timeToCountDownInMillis);
 
-        displayTimeToCountdown();
-        countDownSet = true;
+            displayTimeToCountdown();
+            countDownSet = true;
+        }
     }
 }
 
