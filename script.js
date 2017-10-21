@@ -26,7 +26,7 @@ function displayTimeToCountdown() {
     seconds = Math.floor(timeToCountDownInMillis / 1000) % 60;
     minutes = Math.floor(timeToCountDownInMillis / 1000 / 60) % 60;
     hours = Math.floor(timeToCountDownInMillis / 1000 / 60 / 60);
-    displayTime(getTimeToDisplay());
+    displayTime(getTimeSet());
 }
 
 function setCountdown() {
@@ -72,7 +72,7 @@ function setCountdownMinutes(minutes) {
     }
 }
 
-function getTimeToDisplay() {
+function getTimeSet() {
     return (hours < 10 ? "0" : "") + hours
         + (minutes < 10 ? ":0" : ":") + minutes
         + (seconds < 10 ? ":0" : ":") + seconds;
@@ -122,7 +122,7 @@ function startTimer() {
         seconds = Math.floor(timeLeftToCountDown / 1000) % 60;
 
         console.log(timeLeftToCountDown);
-        displayTime(getTimeToDisplay());
+        displayTime(getTimeSet());
 
         if (timeLeftToCountDown <= 0) {
             console.log("Finished countdown");
