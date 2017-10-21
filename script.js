@@ -158,5 +158,17 @@ function setListeners() {
         if (key.which === 13) {
             setCountdown();
         }
-    })
+    });
+
+    $('#run-timer').on('click', function () {
+        runTimer();
+    });
+
+    $('#reset').on('click', function () {
+        reset();
+    });
+
+    $('#set-time').on('click', function () {
+        setCountdown();
+    });
 }
