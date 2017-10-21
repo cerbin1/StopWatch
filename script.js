@@ -1,4 +1,3 @@
-
 var soundEffect = new Audio('sound/phone_sound_effect.mp3');
 
 var running = false;
@@ -23,6 +22,13 @@ function displayTime(timeToDisplay) {
     $('#timer').text(timeToDisplay);
 }
 
+function displayTimeToCountdown() {
+    seconds = Math.floor(timeToCountDownInMillis / 1000) % 60;
+    minutes = Math.floor(timeToCountDownInMillis / 1000 / 60) % 60;
+    hours = Math.floor(timeToCountDownInMillis / 1000 / 60 / 60);
+    displayTime(getTimeToDisplay());
+}
+
 function setCountdown() {
     if (finished) {
         var secondsValue = parseInt($('#secondsInput').val(), 10);
@@ -43,15 +49,20 @@ function setCountdown() {
             timeToCountDownInMillis = (minutesValue * 60 + secondsValue) * 1000;
             console.log(timeToCountDownInMillis);
 
-            seconds = Math.floor(timeToCountDownInMillis / 1000) % 60;
-            minutes = Math.floor(timeToCountDownInMillis / 1000 / 60) % 60;
-            hours = Math.floor(timeToCountDownInMillis / 1000 / 60 / 60);
-            displayTime(getTimeToDisplay());
+            displayTimeToCountdown();
             countDownSet = true;
         }
     } else {
         console.log("Timer is running");
     }
+}
+
+function setCountdownMinutes(minutes) {
+    timeToCountDownInMillis = (minutes * 60) * 1000;
+    console.log(timeToCountDownInMillis);
+
+    displayTimeToCountdown();
+    countDownSet = true;
 }
 
 function getTimeToDisplay() {
@@ -150,13 +161,13 @@ function setListeners() {
 
     $('#secondsInput').keypress(function (key) {
         if (key.which === 13) {
-            setCountdown();
+            setCountdownMinutes();
         }
     });
 
     $('#minutesInput').keypress(function (key) {
         if (key.which === 13) {
-            setCountdown();
+            setCountdownMinutes();
         }
     });
 
@@ -171,4 +182,20 @@ function setListeners() {
     $('#set-time').on('click', function () {
         setCountdown();
     });
+
+    $('#3-minutes').on('click', function () {
+        setCountdownMinutes(3);
+    });
+
+    $('#5-minutes').on('click', function () {
+        setCountdownMinutes(5);
+    });
+
+    $('#10-minutes').on('click', function () {
+        setCountdownMinutes(10);
+    });
+
+    $('#30-minutes').on('click', function () {
+        setCountdownMinutes(30);
+    })
 }
