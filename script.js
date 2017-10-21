@@ -1,15 +1,15 @@
 var soundEffect = new Audio('sound/phone_sound_effect.mp3');
 
 var running = false;
-var countDownSet = false;
+var set = false;
 var finished = true;
 
 var interval;
 
 var seconds, minutes, hours;
 
-var timeToCountDownInMillis;
-var timeToCountDown;
+var timeToCountdownInMillis;
+var timeToCountdown;
 var timestampWhenPaused;
 
 var resetClicksCount = 0;
@@ -18,18 +18,22 @@ $(document).ready(function () {
     setListeners();
 });
 
-function displayTime(timeToDisplay) {
+function displayTimeToCountdown(timeToDisplay) {
     $('#timer').text(timeToDisplay);
 }
 
-function displayTimeToCountdown() {
-    seconds = Math.floor(timeToCountDownInMillis / 1000) % 60;
-    minutes = Math.floor(timeToCountDownInMillis / 1000 / 60) % 60;
-    hours = Math.floor(timeToCountDownInMillis / 1000 / 60 / 60);
-    displayTime(getTimeSet());
+function setTimeToCountdown(timeInMillis) {
+    timeToCountdownInMillis = timeInMillis;
+    console.log(timeToCountdownInMillis);
+
+    seconds = Math.floor(timeToCountdownInMillis / 1000) % 60;
+    minutes = Math.floor(timeToCountdownInMillis / 1000 / 60) % 60;
+    hours = Math.floor(timeToCountdownInMillis / 1000 / 60 / 60);
+    displayTimeToCountdown(getTimeSet());
+    set = true;
 }
 
-function setCountdown() {
+function setTimer() {
     if (finished) {
         var secondsValue = parseInt($('#secondsInput').val(), 10);
         var minutesValue = parseInt($('#minutesInput').val(), 10);
@@ -46,11 +50,8 @@ function setCountdown() {
         } else if (secondsValue === 0 && minutesValue === 0) {
             console.log("Timer can not be zero");
         } else {
-            timeToCountDownInMillis = (minutesValue * 60 + secondsValue) * 1000;
-            console.log(timeToCountDownInMillis);
-
-            displayTimeToCountdown();
-            countDownSet = true;
+            var timeInMillis = (minutesValue * 60 + secondsValue) * 1000;
+            setTimeToCountdown(timeInMillis);
         }
     } else {
         console.log("Timer is running");
@@ -59,15 +60,12 @@ function setCountdown() {
 
 function setCountdownMinutes(minutes) {
     if (finished) {
-        if ((minutes * 60) * 1000 === timeToCountDownInMillis) {
+        var timeInMillis = (minutes * 60) * 1000;
+        if (timeInMillis === timeToCountdownInMillis) {
             runTimer();
         }
         else {
-            timeToCountDownInMillis = (minutes * 60) * 1000;
-            console.log(timeToCountDownInMillis);
-
-            displayTimeToCountdown();
-            countDownSet = true;
+            setTimeToCountdown(timeInMillis);
         }
     }
 }
@@ -80,8 +78,8 @@ function getTimeSet() {
 
 function runTimer() {
     if (finished) {
-        if (countDownSet) {
-            timeToCountDown = new Date().getTime() + timeToCountDownInMillis;
+        if (set) {
+            timeToCountdown = new Date().getTime() + timeToCountdownInMillis;
             $('#run-timer').text('Pause');
             startTimer();
             finished = false;
@@ -103,8 +101,8 @@ function toggleTimer() {
     } else {
         startTimer();
         console.log("UnPaused");
-        console.log(timeToCountDown);
-        timeToCountDown += new Date().getTime() - timestampWhenPaused;
+        console.log(timeToCountdown);
+        timeToCountdown += new Date().getTime() - timestampWhenPaused;
     }
     changeStatusOfTimer();
 }
@@ -116,17 +114,17 @@ function changeStatusOfTimer() {
 
 function startTimer() {
     interval = setInterval(function () {
-        var timeLeftToCountDown = timeToCountDown - new Date().getTime();
-        hours = Math.floor(timeLeftToCountDown / 3600000);
-        minutes = Math.floor(timeLeftToCountDown / 60000) % 60;
-        seconds = Math.floor(timeLeftToCountDown / 1000) % 60;
+        var timeLeftToCountdown = timeToCountdown - new Date().getTime();
+        hours = Math.floor(timeLeftToCountdown / 3600000);
+        minutes = Math.floor(timeLeftToCountdown / 60000) % 60;
+        seconds = Math.floor(timeLeftToCountdown / 1000) % 60;
 
-        console.log(timeLeftToCountDown);
-        displayTime(getTimeSet());
+        console.log(timeLeftToCountdown);
+        displayTimeToCountdown(getTimeSet());
 
-        if (timeLeftToCountDown <= 0) {
+        if (timeLeftToCountdown <= 0) {
             console.log("Finished countdown");
-            displayTime('00:00:00');
+            displayTimeToCountdown('00:00:00');
             stopTimer();
             soundEffect.play();
         }
@@ -136,7 +134,7 @@ function startTimer() {
 function stopTimer() {
     clearInterval(interval);
     $('#run-timer').text('Start');
-    countDownSet = false;
+    set = false;
     running = false;
     finished = true;
 }
@@ -187,7 +185,7 @@ function setListeners() {
     });
 
     $('#set-time').on('click', function () {
-        setCountdown();
+        setTimer();
     });
 
     $('#3-minutes').on('click', function () {
