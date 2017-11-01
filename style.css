@@ -95,3 +95,8 @@ input {
 .padding-input {
     padding: 15px;
 }
+
+.input-error {
+    color: red;
+    border: 1px solid red;
+}

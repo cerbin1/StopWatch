@@ -35,8 +35,11 @@ function setTimeToCountdown(timeInMillis) {
 
 function setTimer() {
     if (finished) {
-        var secondsValue = parseInt($('#secondsInput').val(), 10);
-        var minutesValue = parseInt($('#minutesInput').val(), 10);
+        var secondsInput = $('#secondsInput');
+        var secondsValue = parseInt(secondsInput.val(), 10);
+
+        var minutesInput = $('#minutesInput');
+        var minutesValue = parseInt(minutesInput.val(), 10);
 
         if (isNaN(secondsValue)) {
             secondsValue = 0;
@@ -44,12 +47,19 @@ function setTimer() {
         if (isNaN(minutesValue)) {
             minutesValue = 0;
         }
-
-        if (secondsValue < 0 || minutesValue < 0) {
-            console.log("Time can not be negative");
-        } else if (secondsValue === 0 && minutesValue === 0) {
-            console.log("Timer can not be zero");
-        } else {
+        if (secondsValue < 0) {
+            secondsInput.addClass('input-error');
+        }
+        else if (minutesValue < 0) {
+            minutesInput.addClass('input-error');
+        }
+        else if (secondsValue === 0 && minutesValue === 0) {
+            secondsInput.addClass('input-error');
+            minutesInput.addClass('input-error');
+        }
+        else {
+            secondsInput.removeClass('input-error');
+            minutesInput.removeClass('input-error');
             var timeInMillis = (minutesValue * 60 + secondsValue) * 1000;
             setTimeToCountdown(timeInMillis);
         }
