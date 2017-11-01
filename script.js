@@ -166,13 +166,13 @@ function setListeners() {
 
     $('#secondsInput').keypress(function (key) {
         if (key.which === 13) {
-            setCountdownMinutes();
+            setTimer();
         }
     });
 
     $('#minutesInput').keypress(function (key) {
         if (key.which === 13) {
-            setCountdownMinutes();
+            setTimer();
         }
     });
 
