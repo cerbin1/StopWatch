@@ -71,7 +71,7 @@ $('#reset').on('click', function () {
     resetStopwatch();
 });
 
-$('#appendLap').on('click', function () {
+$('#append-lap').on('click', function () {
     if (running) {
         appendLap();
     }
