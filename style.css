@@ -1,87 +1,9 @@
-.buttons {
-    font-size: 120px;
-    text-align: center;
-    margin: 0 auto;
-}
-
-.countdown-buttons {
-    margin-left: 140px;
-}
-
-ul {
-    list-style-type: none;
-}
-
-.navbar li {
-    cursor: pointer;
-    margin: 10px;
-    padding: 9px 11px;
-    width: 90px;
-    float: left;
-    font-size: 30px;
-    border: 1px solid;
-    text-align: center;
-    border-radius: 5px;
-    color: #1D2224;
-}
-
-.clearLapsButton {
-    width: 150px !important;
-}
-
-.navbar :hover {
-    background-color: #3E3F40;
-    color: #E1E4E6;
-}
-
-.subpage-button :hover {
-    background-color: #3E3F40;
-    color: #E1E4E6;
-}
-
-.subpage-button a {
-    text-decoration: none;
-    float: left;
-    width: 248px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 15px;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-    font-size: 40px;
-    cursor: pointer;
-    border: 1px solid;
-    border-radius: 5px;
-    text-align: center;
-    color: #1D2224;
-}
-
 input {
     width: 100px;
     height: 40px;
     font-size: 30px;
     text-align: center;
     margin-left: 10px;
-}
-
-.input-button {
-    height: 50px;
-    font-size: 30px;
-    padding: 2px 5px;
-}
-
-.backButton {
-    margin: 40px 30px 40px 30px;
-    text-align: right;
-    font-size: 20px;
-}
-
-.backButton a {
-    color: blue;
-}
-
-.center {
-    text-align: center;
 }
 
 .top-buffer {
