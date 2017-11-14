@@ -13,13 +13,13 @@
     <div id="timer" class="large-font text-center">00:00:00</div>
     <div class="row col-md-6 col-md-offset-3">
         <div class="btn-group btn-group-justified">
-            <a id="startPause" onclick="toggleStopwatch()" href="#" class="btn btn-success">Start</a>
-            <a id="reset" onclick="resetStopwatch()" href="#" class="btn btn-danger">Reset</a>
-            <a id="lap" onclick="displayLap()" href="#" class="btn btn-info">Lap</a>
+            <a id="startPause" href="#" class="btn btn-success">Start</a>
+            <a id="reset" href="#" class="btn btn-danger">Reset</a>
+            <a id="lap" href="#" class="btn btn-info">Lap</a>
         </div>
     </div>
     <div class="row col-md-6 col-md-offset-3 text-center">
-        <a id="clear" onclick="clearLaps()" href="#" class="btn btn-default">Clear laps</a>
+        <a id="resetLaps" href="#" class="btn btn-default">Clear laps</a>
     </div>
 
     <div class="row col-md-6 col-md-offset-3 text-center" id="outputLaps"></div>
@@ -36,21 +36,21 @@
     var interval;
     var running = false;
 
-    var startTime;
-    var timePaused = 0;
+    var startingTime;
+    var pausedTime = 0;
 
     var numberOfLap = 0;
 
     function toggleStopwatch() {
         if (running) {
-            timePaused = Date.now() - startTime;
+            pausedTime = Date.now() - startingTime;
             running = false;
             clearInterval(interval);
             $('#startPause').text('Resume');
         }
         else {
             running = true;
-            startTime = Date.now() - timePaused;
+            startingTime = Date.now() - pausedTime;
             runStopwatch();
             $('#startPause').text('Pause');
         }
@@ -62,7 +62,7 @@
 
     function runStopwatch() {
         interval = setInterval(function () {
-            var timePassed = Date.now() - startTime;
+            var timePassed = Date.now() - startingTime;
             milliseconds = timePassed % 1000;
             seconds = Math.floor(timePassed / 1000) % 60;
             minutes = Math.floor(timePassed / 1000 / 60);
@@ -89,10 +89,28 @@
         $('#outputLaps').append(lap).append('<br>');
     }
 
-    function clearLaps() {
+    function resetLaps() {
         numberOfLap = 0;
         $('#outputLaps').text('');
     }
+
+    $('#startPause').on('click', function () {
+        toggleStopwatch();
+    });
+
+    $('#reset').on('click', function () {
+        resetStopwatch();
+    });
+
+    $('#appendLap').on('click', function () {
+        displayLap();
+    });
+
+    $('#resetLaps').on('click', function () {
+        resetLaps();
+    })
+
+
 </script>
 </body>
 </html>
