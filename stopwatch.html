@@ -83,7 +83,7 @@
         $('#timer').text('00:00:00');
     }
 
-    function displayLap() {
+    function appendLap() {
         numberOfLap++;
         var lap = 'Number of lap: ' + numberOfLap + ' time: ' + minutes + ':' + seconds + ':0' + milliseconds;
         $('#outputLaps').append(lap).append('<br>');
@@ -103,14 +103,14 @@
     });
 
     $('#appendLap').on('click', function () {
-        displayLap();
+        if (running) {
+            appendLap();
+        }
     });
 
     $('#resetLaps').on('click', function () {
         resetLaps();
     })
-
-
 </script>
 </body>
 </html>
