@@ -16,12 +16,14 @@ function toggleStopwatch() {
         running = false;
         clearInterval(interval);
         $('#startPause').text('Resume');
+        $('#append-lap').addClass('disabled');
     }
     else {
         running = true;
         startingTime = Date.now() - pausedTime;
         runStopwatch();
         $('#startPause').text('Pause');
+        $('#append-lap').removeClass('disabled');
     }
 }
 
@@ -40,6 +42,7 @@ function runStopwatch() {
             + ':' + addAdditionalZeroIfNeeded(seconds)
             + ':' + addAdditionalZeroIfNeeded(milliseconds));
     }, 10);
+    $('#append-lap').removeClass('disabled');
 }
 
 function resetStopwatch() {
@@ -79,4 +82,4 @@ $('#append-lap').on('click', function () {
 
 $('#resetLaps').on('click', function () {
     resetLaps();
-})
+});
