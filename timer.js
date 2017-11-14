@@ -147,6 +147,7 @@ function stopTimer() {
     set = false;
     running = false;
     finished = true;
+    timeToCountdownInMillis = 0;
 }
 
 function reset() {
