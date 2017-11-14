@@ -24,6 +24,7 @@ function toggleStopwatch() {
         runStopwatch();
         $('#startPause').text('Pause');
         $('#append-lap').removeClass('disabled');
+        $('#reset').removeClass('disabled');
     }
 }
 
@@ -53,6 +54,8 @@ function resetStopwatch() {
     running = false;
     $('#startPause').text('Start');
     $('#timer').text('00:00:00');
+    $('#append-lap').addClass('disabled');
+    $('#reset').addClass('disabled');
 }
 
 function appendLap() {
