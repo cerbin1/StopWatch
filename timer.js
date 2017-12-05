@@ -134,20 +134,21 @@ function startTimer() {
             displayTimeToCountdown('00:00:00');
             stopTimer();
             soundEffect.play();
-            undisableButton($('#reset'));
-            undisableButton($('#set-time'));
-            disableButton($('#run-timer'));
         }
     }, 100);
 }
 
 function stopTimer() {
     clearInterval(interval);
-    $('#run-timer').text('Start');
     set = false;
     running = false;
     finished = true;
     timeToCountdownInMillis = 0;
+    var runTimerButton = $('#run-timer');
+    runTimerButton.text('Start');
+    disableButton(runTimerButton);
+    undisableButton($('#reset'));
+    undisableButton($('#set-time'));
 }
 
 function reset() {
