@@ -76,6 +76,7 @@ function setCountdownMinutes(minutes) {
         }
         else {
             setTimeToCountdown(timeInMillis);
+            $('#minutesInput').val(minutes);
         }
     }
 }
