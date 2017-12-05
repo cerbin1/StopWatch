@@ -25,7 +25,6 @@ function displayTimeToCountdown(timeToDisplay) {
 function setTimeToCountdown(timeInMillis) {
     undisableButton($('#run-timer'));
     timeToCountdownInMillis = timeInMillis;
-    console.log(timeToCountdownInMillis);
 
     seconds = Math.floor(timeToCountdownInMillis / 1000) % 60;
     minutes = Math.floor(timeToCountdownInMillis / 1000 / 60) % 60;
@@ -64,8 +63,6 @@ function setTimer() {
             var timeInMillis = (minutesValue * 60 + secondsValue) * 1000;
             setTimeToCountdown(timeInMillis);
         }
-    } else {
-        console.log("Timer is running");
     }
 }
 
@@ -99,8 +96,6 @@ function runTimer() {
             running = true;
             disableButton($('#reset'));
             disableButton($('#set-time'));
-        } else {
-            console.log("Set new timer");
         }
     }
     else {
@@ -111,13 +106,10 @@ function runTimer() {
 function toggleTimer() {
     if (running) {
         clearInterval(interval);
-        console.log("Paused");
         timestampWhenPaused = new Date().getTime();
         undisableButton($('#reset'));
     } else {
         startTimer();
-        console.log("UnPaused");
-        console.log(timeToCountdown);
         timeToCountdown += new Date().getTime() - timestampWhenPaused;
         disableButton($('#reset'));
     }
@@ -136,11 +128,9 @@ function startTimer() {
         minutes = Math.floor(timeLeftToCountdown / 60000) % 60;
         seconds = Math.floor(timeLeftToCountdown / 1000) % 60;
 
-        console.log(timeLeftToCountdown);
         displayTimeToCountdown(getTimeSet());
 
         if (timeLeftToCountdown <= 0) {
-            console.log("Finished countdown");
             displayTimeToCountdown('00:00:00');
             stopTimer();
             soundEffect.play();
