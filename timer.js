@@ -77,6 +77,7 @@ function setCountdownMinutes(minutes) {
         else {
             setTimeToCountdown(timeInMillis);
             $('#minutesInput').val(minutes);
+            $('#secondsInput').val(0);
         }
     }
 }
@@ -95,6 +96,8 @@ function runTimer() {
             startTimer();
             finished = false;
             running = true;
+            disableButton($('#reset'));
+            disableButton($('#set-time'));
         } else {
             console.log("Set new timer");
         }
@@ -109,11 +112,13 @@ function toggleTimer() {
         clearInterval(interval);
         console.log("Paused");
         timestampWhenPaused = new Date().getTime();
+        undisableButton($('#reset'));
     } else {
         startTimer();
         console.log("UnPaused");
         console.log(timeToCountdown);
         timeToCountdown += new Date().getTime() - timestampWhenPaused;
+        disableButton($('#reset'));
     }
     changeStatusOfTimer();
 }
@@ -138,6 +143,8 @@ function startTimer() {
             displayTimeToCountdown('00:00:00');
             stopTimer();
             soundEffect.play();
+            undisableButton($('#reset'));
+            undisableButton($('#set-time'));
         }
     }, 100);
 }
@@ -161,12 +168,21 @@ function reset() {
         $('#seconds').val(0);
         $('#minutes').val(0);
         $('#timer').text('00:00:00');
+        undisableButton($('#set-time'));
         resetClicksCount++;
         if (triggeredClearingInputs()) {
             $('#secondsInput').val('');
             $('#minutesInput').val('');
         }
     }
+}
+
+function disableButton(button) {
+    button.addClass('disabled');
+}
+
+function undisableButton(button) {
+    button.removeClass('disabled');
 }
 
 function setListeners() {
