@@ -23,6 +23,7 @@ function displayTimeToCountdown(timeToDisplay) {
 }
 
 function setTimeToCountdown(timeInMillis) {
+    undisableButton($('#run-timer'));
     timeToCountdownInMillis = timeInMillis;
     console.log(timeToCountdownInMillis);
 
@@ -145,6 +146,7 @@ function startTimer() {
             soundEffect.play();
             undisableButton($('#reset'));
             undisableButton($('#set-time'));
+            disableButton($('#run-timer'));
         }
     }, 100);
 }
@@ -169,6 +171,7 @@ function reset() {
         $('#minutes').val(0);
         $('#timer').text('00:00:00');
         undisableButton($('#set-time'));
+        disableButton($('#run-timer'));
         resetClicksCount++;
         if (triggeredClearingInputs()) {
             $('#secondsInput').val('');
