@@ -209,20 +209,4 @@ function setListeners() {
     $('#set-time').on('click', function () {
         setTimer();
     });
-
-    $('#3-minutes').on('click', function () {
-        setCountdownMinutes(3);
-    });
-
-    $('#5-minutes').on('click', function () {
-        setCountdownMinutes(5);
-    });
-
-    $('#10-minutes').on('click', function () {
-        setCountdownMinutes(10);
-    });
-
-    $('#30-minutes').on('click', function () {
-        setCountdownMinutes(30);
-    })
 }
