@@ -8,7 +8,7 @@ let interval;
 
 let seconds, minutes, hours;
 
-let timeToCountdownInMillis;
+let timeToCountdownInMillis = 0;
 let timeToCountdown;
 let timestampWhenPaused;
 
@@ -24,7 +24,12 @@ function displayTimeToCountdown(timeToDisplay) {
 
 function setTimeToCountdown(timeInMillis) {
     enableButton($('#run-timer'));
-    timeToCountdownInMillis = timeInMillis;
+    if (timeToCountdownInMillis === 0) {
+        timeToCountdownInMillis = timeInMillis;
+    }
+    else {
+        timeToCountdownInMillis += timeInMillis;
+    }
 
     seconds = Math.floor(timeToCountdownInMillis / 1000) % 60;
     minutes = Math.floor(timeToCountdownInMillis / 1000 / 60) % 60;
@@ -69,14 +74,10 @@ function setTimer() {
 function setCountdownMinutes(minutes) {
     if (finished) {
         let timeInMillis = (minutes * 60) * 1000;
-        if (timeInMillis === timeToCountdownInMillis) {
-            runTimer();
-        }
-        else {
-            setTimeToCountdown(timeInMillis);
-            $('#minutesInput').val(minutes);
-            $('#secondsInput').val(0);
-        }
+
+        setTimeToCountdown(timeInMillis);
+        $('#minutesInput').val(Math.floor(timeToCountdownInMillis / 1000 / 60));
+        $('#secondsInput').val(0);
     }
 }
 
