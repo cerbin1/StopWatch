@@ -18,19 +18,19 @@
     </div>
     <div class="row">
         <div class="col-md-6 offset-3 btn-group">
-            <div id="run-timer" class="btn btn-success disabled col-md-4" onclick="runTimer()">Start</div>
+            <div id="runTimer" class="btn btn-success disabled col-md-4" onclick="runTimer()">Start</div>
             <div id="reset" class="btn btn-danger col-md-4" onclick="reset()">Reset</div>
-            <div id="set-time" class="btn btn-info col-md-4" onclick="setTimer()">Set</div>
+            <div id="setTime" class="btn btn-info col-md-4" onclick="setTimer()">Set</div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-2 offset-5">
             <div class="form-group">
-                <label for="minutesInput">Minutes</label>
-                <input id="minutesInput" class="form-control" type="number" placeholder="0">
+                <label id="labelForMinutes" for="minutesInput">Minutes</label>
+                <input id="minutesInput" class="form-control input-error" type="number" placeholder="0">
             </div>
             <div class="form-group">
-                <label for="secondsInput">Seconds</label>
+                <label id="labelForSeconds" for="secondsInput">Seconds</label>
                 <input id="secondsInput" class="form-control" type="number" placeholder="0">
             </div>
         </div>

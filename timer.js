@@ -22,8 +22,8 @@ function displayTimeToCountdown(timeToDisplay) {
     $('#timer').text(timeToDisplay);
 }
 
-function setTimeToCountdown(timeInMillis) {
-    enableButton($('#run-timer'));
+function addTimeToCountdown(timeInMillis) {
+    enableButton($('#runTimer'));
     if (timeToCountdownInMillis === 0) {
         timeToCountdownInMillis = timeInMillis;
     }
@@ -38,12 +38,23 @@ function setTimeToCountdown(timeInMillis) {
     set = true;
 }
 
+function setTimeToCountdown(timeInMillis) {
+    enableButton($('#runTimer'));
+    timeToCountdownInMillis = timeInMillis;
+
+    seconds = Math.floor(timeToCountdownInMillis / 1000) % 60;
+    minutes = Math.floor(timeToCountdownInMillis / 1000 / 60) % 60;
+    hours = Math.floor(timeToCountdownInMillis / 1000 / 60 / 60);
+    displayTimeToCountdown(getTimeSet());
+    set = true;
+}
+
 function setTimer() {
     if (finished) {
         let secondsInput = $('#secondsInput');
-        let secondsValue = parseInt(secondsInput.val(), 10);
-
         let minutesInput = $('#minutesInput');
+
+        let secondsValue = parseInt(secondsInput.val(), 10);
         let minutesValue = parseInt(minutesInput.val(), 10);
 
         if (isNaN(secondsValue)) {
@@ -52,19 +63,30 @@ function setTimer() {
         if (isNaN(minutesValue)) {
             minutesValue = 0;
         }
-        if (secondsValue < 0) {
-            secondsInput.addClass('input-error');
+
+        let labelForSeconds = $('#labelForSeconds');
+        let labelForMinutes = $('#labelForMinutes');
+
+        secondsInput.removeClass('is-invalid');
+        minutesInput.removeClass('is-invalid');
+        labelForSeconds.removeClass('text-danger');
+        labelForMinutes.removeClass('text-danger');
+
+        if (secondsValue === 0 && minutesValue === 0) {
+            labelForSeconds.addClass('text-danger');
+            labelForMinutes.addClass('text-danger');
+            secondsInput.addClass('is-invalid');
+            minutesInput.addClass('is-invalid');
+            return;
         }
-        else if (minutesValue < 0) {
-            minutesInput.addClass('input-error');
-        }
-        else if (secondsValue === 0 && minutesValue === 0) {
-            secondsInput.addClass('input-error');
-            minutesInput.addClass('input-error');
+        if (secondsValue < 0 || minutesValue < 0) {
+            secondsInput.addClass(secondsValue < 0 ? 'is-invalid' : '');
+            minutesInput.addClass(minutesValue < 0 ? 'is-invalid' : '');
+
+            labelForSeconds.addClass(secondsValue < 0 ? 'text-danger' : '');
+            labelForMinutes.addClass(minutesValue < 0 ? 'text-danger' : '');
         }
         else {
-            secondsInput.removeClass('input-error');
-            minutesInput.removeClass('input-error');
             let timeInMillis = (minutesValue * 60 + secondsValue) * 1000;
             setTimeToCountdown(timeInMillis);
         }
@@ -75,9 +97,8 @@ function setCountdownMinutes(minutes) {
     if (finished) {
         let timeInMillis = (minutes * 60) * 1000;
 
-        setTimeToCountdown(timeInMillis);
+        addTimeToCountdown(timeInMillis);
         $('#minutesInput').val(Math.floor(timeToCountdownInMillis / 1000 / 60));
-        $('#secondsInput').val(0);
     }
 }
 
@@ -91,12 +112,12 @@ function runTimer() {
     if (finished) {
         if (set) {
             timeToCountdown = new Date().getTime() + timeToCountdownInMillis;
-            $('#run-timer').text('Pause');
+            $('#runTimer').text('Pause');
             startTimer();
             finished = false;
             running = true;
             disableButton($('#reset'));
-            disableButton($('#set-time'));
+            disableButton($('#setTime'));
         }
     }
     else {
@@ -119,7 +140,7 @@ function toggleTimer() {
 
 function changeStatusOfTimer() {
     running = !running;
-    $('#run-timer').text(running ? 'Pause' : 'Resume');
+    $('#runTimer').text(running ? 'Pause' : 'Resume');
 }
 
 function startTimer() {
@@ -145,11 +166,11 @@ function stopTimer() {
     running = false;
     finished = true;
     timeToCountdownInMillis = 0;
-    let runTimerButton = $('#run-timer');
+    let runTimerButton = $('#runTimer');
     runTimerButton.text('Start');
     disableButton(runTimerButton);
     enableButton($('#reset'));
-    enableButton($('#set-time'));
+    enableButton($('#setTime'));
 }
 
 function reset() {
@@ -162,8 +183,8 @@ function reset() {
         $('#seconds').val(0);
         $('#minutes').val(0);
         $('#timer').text('00:00:00');
-        enableButton($('#set-time'));
-        disableButton($('#run-timer'));
+        enableButton($('#setTime'));
+        disableButton($('#runTimer'));
         resetClicksCount++;
         if (triggeredClearingInputs()) {
             $('#secondsInput').val('');
