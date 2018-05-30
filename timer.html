@@ -5,42 +5,48 @@
     <title>Countdown</title>
     <link rel="shortcut icon" href="res/favicon.ico"/>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
     <script src="timer.js"></script>
 </head>
 <body>
 <div class="container">
-    <div class="row col-md-6 col-md-offset-3 top-buffer">
-        <div id="timer" class="large-font text-center">00:00:00</div>
-    </div>
-    <div class="row col-md-6 col-md-offset-3">
-        <div class="btn-group btn-group-justified">
-            <a id="run-timer" onclick="runTimer()" class="btn btn-success disabled">Start</a>
-            <a id="reset" onclick="reset()" class="btn btn-danger">Reset</a>
-            <a id="set-time" onclick="setTimer()" class="btn btn-info">Set</a>
+    <div class="row">
+        <div class="col-md-6 offset-3 text-center">
+            <div id="timer" class="large-font">00:00:00</div>
         </div>
     </div>
-    <div class="row col-md-6 col-md-offset-3 text-center">
-        <label for="minutesInput" class="padding-input">Minutes</label>
-        <input id="minutesInput" type="number" placeholder="0">
-        <label for="secondsInput" class="padding-input">Seconds</label>
-        <input id="secondsInput" type="number" placeholder="0">
-    </div>
-    <div class="row col-md-6 col-md-offset-3">
-        <div class="btn-group btn-group-justified">
-            <a onclick="setCountdownMinutes(1)" class="btn btn-default">1 minute</a>
-            <a onclick="setCountdownMinutes(3)" class="btn btn-default">3 minutes</a>
-            <a onclick="setCountdownMinutes(5)" class="btn btn-default">5 minutes</a>
-            <a onclick="setCountdownMinutes(30)" class="btn btn-default">30 minutes</a>
+    <div class="row">
+        <div class="col-md-6 offset-3 btn-group">
+            <div id="run-timer" class="btn btn-success disabled col-md-4" onclick="runTimer()">Start</div>
+            <div id="reset" class="btn btn-danger col-md-4" onclick="reset()">Reset</div>
+            <div id="set-time" class="btn btn-info col-md-4" onclick="setTimer()">Set</div>
         </div>
     </div>
-    <div class="row col-md-6 col-md-offset-3 text-right">
-        <a href="index.html" class="btn btn-lg btn-link">Back</a>
+    <div class="row">
+        <div class="col-md-2 offset-5">
+            <div class="form-group">
+                <label for="minutesInput">Minutes</label>
+                <input id="minutesInput" class="form-control" type="number" placeholder="0">
+            </div>
+            <div class="form-group">
+                <label for="secondsInput">Seconds</label>
+                <input id="secondsInput" class="form-control" type="number" placeholder="0">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-3 btn-group">
+            <div onclick="setCountdownMinutes(1)" class="btn btn-dark col-md-3">1 minute</div>
+            <div onclick="setCountdownMinutes(3)" class="btn btn-dark col-md-3">3 minutes</div>
+            <div onclick="setCountdownMinutes(5)" class="btn btn-dark col-md-3">5 minutes</div>
+            <div onclick="setCountdownMinutes(30)" class="btn btn-dark col-md-3">30 minutes</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-3 text-right">
+            <a href="index.html" class="btn btn-lg">Back</a>
+        </div>
     </div>
 </div>
 </body>
