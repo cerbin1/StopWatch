@@ -198,16 +198,4 @@ function setListeners() {
             setTimer();
         }
     });
-
-    $('#run-timer').on('click', function () {
-        runTimer();
-    });
-
-    $('#reset').on('click', function () {
-        reset();
-    });
-
-    $('#set-time').on('click', function () {
-        setTimer();
-    });
 }
