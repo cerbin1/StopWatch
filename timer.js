@@ -6,8 +6,6 @@ let finished = true;
 
 let interval;
 
-let seconds, minutes, hours;
-
 let timeToCountdownInMillis = 0;
 let timeToCountdown;
 let timestampWhenPaused;
@@ -22,6 +20,18 @@ function displayTimeToCountdown(timeToDisplay) {
     $('#timer').text(timeToDisplay);
 }
 
+function getSeconds() {
+    return Math.floor(timeToCountdownInMillis / 1000) % 60;
+}
+
+function getMinutes() {
+    return Math.floor(timeToCountdownInMillis / 1000 / 60) % 60;
+}
+
+function getHours() {
+    return Math.floor(timeToCountdownInMillis / 1000 / 60 / 60);
+}
+
 function addTimeToCountdown(timeInMillis) {
     enableButton($('#runTimer'));
     if (timeToCountdownInMillis === 0) {
@@ -31,9 +41,6 @@ function addTimeToCountdown(timeInMillis) {
         timeToCountdownInMillis += timeInMillis;
     }
 
-    seconds = Math.floor(timeToCountdownInMillis / 1000) % 60;
-    minutes = Math.floor(timeToCountdownInMillis / 1000 / 60) % 60;
-    hours = Math.floor(timeToCountdownInMillis / 1000 / 60 / 60);
     displayTimeToCountdown(getTimeSet());
     set = true;
 }
@@ -42,9 +49,6 @@ function setTimeToCountdown(timeInMillis) {
     enableButton($('#runTimer'));
     timeToCountdownInMillis = timeInMillis;
 
-    seconds = Math.floor(timeToCountdownInMillis / 1000) % 60;
-    minutes = Math.floor(timeToCountdownInMillis / 1000 / 60) % 60;
-    hours = Math.floor(timeToCountdownInMillis / 1000 / 60 / 60);
     displayTimeToCountdown(getTimeSet());
     set = true;
 }
@@ -103,6 +107,9 @@ function setCountdownMinutes(minutes) {
 }
 
 function getTimeSet() {
+    let hours = getHours();
+    let minutes = getMinutes();
+    let seconds = getSeconds();
     return (hours < 10 ? "0" : "") + hours
         + (minutes < 10 ? ":0" : ":") + minutes
         + (seconds < 10 ? ":0" : ":") + seconds;
@@ -145,14 +152,11 @@ function changeStatusOfTimer() {
 
 function startTimer() {
     interval = setInterval(function () {
-        let timeLeftToCountdown = timeToCountdown - new Date().getTime();
-        hours = Math.floor(timeLeftToCountdown / 3600000);
-        minutes = Math.floor(timeLeftToCountdown / 60000) % 60;
-        seconds = Math.floor(timeLeftToCountdown / 1000) % 60;
+        timeToCountdownInMillis = timeToCountdown - new Date().getTime();
 
         displayTimeToCountdown(getTimeSet());
 
-        if (timeLeftToCountdown <= 0) {
+        if (timeToCountdownInMillis <= 0) {
             displayTimeToCountdown('00:00:00');
             stopTimer();
             soundEffect.play();
