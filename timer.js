@@ -23,7 +23,7 @@ function displayTimeToCountdown(timeToDisplay) {
 }
 
 function setTimeToCountdown(timeInMillis) {
-    undisableButton($('#run-timer'));
+    enableButton($('#run-timer'));
     timeToCountdownInMillis = timeInMillis;
 
     seconds = Math.floor(timeToCountdownInMillis / 1000) % 60;
@@ -107,7 +107,7 @@ function toggleTimer() {
     if (running) {
         clearInterval(interval);
         timestampWhenPaused = new Date().getTime();
-        undisableButton($('#reset'));
+        enableButton($('#reset'));
     } else {
         startTimer();
         timeToCountdown += new Date().getTime() - timestampWhenPaused;
@@ -147,8 +147,8 @@ function stopTimer() {
     let runTimerButton = $('#run-timer');
     runTimerButton.text('Start');
     disableButton(runTimerButton);
-    undisableButton($('#reset'));
-    undisableButton($('#set-time'));
+    enableButton($('#reset'));
+    enableButton($('#set-time'));
 }
 
 function reset() {
@@ -161,7 +161,7 @@ function reset() {
         $('#seconds').val(0);
         $('#minutes').val(0);
         $('#timer').text('00:00:00');
-        undisableButton($('#set-time'));
+        enableButton($('#set-time'));
         disableButton($('#run-timer'));
         resetClicksCount++;
         if (triggeredClearingInputs()) {
@@ -175,7 +175,7 @@ function disableButton(button) {
     button.addClass('disabled');
 }
 
-function undisableButton(button) {
+function enableButton(button) {
     button.removeClass('disabled');
 }
 
