@@ -167,6 +167,7 @@ function reset() {
         if (triggeredClearingInputs()) {
             $('#secondsInput').val('');
             $('#minutesInput').val('');
+            resetClicksCount = 0;
         }
     }
 }
