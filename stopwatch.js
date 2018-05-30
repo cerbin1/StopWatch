@@ -60,7 +60,7 @@ function resetStopwatch() {
 
 function appendLap() {
     numberOfLap++;
-    let lap = 'Number of lap: ' + numberOfLap + ' time: ' + minutes + ':' + seconds + ':0' + milliseconds;
+    let lap = 'Lap ' + numberOfLap + ', time: ' + minutes + ':' + seconds + ':0' + milliseconds;
     $('#outputLaps').append(lap).append('<br>');
 }
 
