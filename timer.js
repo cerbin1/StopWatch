@@ -1,18 +1,18 @@
-var soundEffect = new Audio('sound/phone_sound_effect.mp3');
+let soundEffect = new Audio('sound/phone_sound_effect.mp3');
 
-var running = false;
-var set = false;
-var finished = true;
+let running = false;
+let set = false;
+let finished = true;
 
-var interval;
+let interval;
 
-var seconds, minutes, hours;
+let seconds, minutes, hours;
 
-var timeToCountdownInMillis;
-var timeToCountdown;
-var timestampWhenPaused;
+let timeToCountdownInMillis;
+let timeToCountdown;
+let timestampWhenPaused;
 
-var resetClicksCount = 0;
+let resetClicksCount = 0;
 
 $(document).ready(function () {
     setListeners();
@@ -35,11 +35,11 @@ function setTimeToCountdown(timeInMillis) {
 
 function setTimer() {
     if (finished) {
-        var secondsInput = $('#secondsInput');
-        var secondsValue = parseInt(secondsInput.val(), 10);
+        let secondsInput = $('#secondsInput');
+        let secondsValue = parseInt(secondsInput.val(), 10);
 
-        var minutesInput = $('#minutesInput');
-        var minutesValue = parseInt(minutesInput.val(), 10);
+        let minutesInput = $('#minutesInput');
+        let minutesValue = parseInt(minutesInput.val(), 10);
 
         if (isNaN(secondsValue)) {
             secondsValue = 0;
@@ -60,7 +60,7 @@ function setTimer() {
         else {
             secondsInput.removeClass('input-error');
             minutesInput.removeClass('input-error');
-            var timeInMillis = (minutesValue * 60 + secondsValue) * 1000;
+            let timeInMillis = (minutesValue * 60 + secondsValue) * 1000;
             setTimeToCountdown(timeInMillis);
         }
     }
@@ -68,7 +68,7 @@ function setTimer() {
 
 function setCountdownMinutes(minutes) {
     if (finished) {
-        var timeInMillis = (minutes * 60) * 1000;
+        let timeInMillis = (minutes * 60) * 1000;
         if (timeInMillis === timeToCountdownInMillis) {
             runTimer();
         }
@@ -123,7 +123,7 @@ function changeStatusOfTimer() {
 
 function startTimer() {
     interval = setInterval(function () {
-        var timeLeftToCountdown = timeToCountdown - new Date().getTime();
+        let timeLeftToCountdown = timeToCountdown - new Date().getTime();
         hours = Math.floor(timeLeftToCountdown / 3600000);
         minutes = Math.floor(timeLeftToCountdown / 60000) % 60;
         seconds = Math.floor(timeLeftToCountdown / 1000) % 60;
@@ -144,7 +144,7 @@ function stopTimer() {
     running = false;
     finished = true;
     timeToCountdownInMillis = 0;
-    var runTimerButton = $('#run-timer');
+    let runTimerButton = $('#run-timer');
     runTimerButton.text('Start');
     disableButton(runTimerButton);
     undisableButton($('#reset'));

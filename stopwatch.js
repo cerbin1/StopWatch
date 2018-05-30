@@ -1,14 +1,14 @@
-var milliseconds = 0;
-var seconds = 0;
-var minutes = 0;
+let milliseconds = 0;
+let seconds = 0;
+let minutes = 0;
 
-var interval;
-var running = false;
+let interval;
+let running = false;
 
-var startingTime;
-var pausedTime = 0;
+let startingTime;
+let pausedTime = 0;
 
-var numberOfLap = 0;
+let numberOfLap = 0;
 
 function toggleStopwatch() {
     if (running) {
@@ -34,7 +34,7 @@ function addAdditionalZeroIfNeeded(timeUnit) {
 
 function runStopwatch() {
     interval = setInterval(function () {
-        var timePassed = Date.now() - startingTime;
+        let timePassed = Date.now() - startingTime;
         milliseconds = timePassed % 1000;
         seconds = Math.floor(timePassed / 1000) % 60;
         minutes = Math.floor(timePassed / 1000 / 60);
@@ -60,7 +60,7 @@ function resetStopwatch() {
 
 function appendLap() {
     numberOfLap++;
-    var lap = 'Number of lap: ' + numberOfLap + ' time: ' + minutes + ':' + seconds + ':0' + milliseconds;
+    let lap = 'Number of lap: ' + numberOfLap + ' time: ' + minutes + ':' + seconds + ':0' + milliseconds;
     $('#outputLaps').append(lap).append('<br>');
 }
 
